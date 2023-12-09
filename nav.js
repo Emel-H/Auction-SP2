@@ -45,7 +45,7 @@ function hideLogout(){
  */
 function navLogic(){
     const token = localStorage.getItem('accessToken');
-    if(token=="null"){
+    if(token==null){
         hideProfile();
         hideLogout();
         showLogin();
@@ -66,6 +66,6 @@ logoutNav.addEventListener("click", logout)
  * function to log user out and delete access token
  */
 function logout(){
-    localStorage.setItem("accessToken",null);
+    localStorage.clear();
     navLogic();
 };
