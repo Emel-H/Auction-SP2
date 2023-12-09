@@ -13,6 +13,7 @@ async function login(user){
         if(response.ok){
             localStorage.username = jsonReturn.name;
             localStorage.email = jsonReturn.email;
+            localStorage.credits = jsonReturn.credits;
             localStorage.accessToken = jsonReturn.accessToken;
             localStorage.avatar = jsonReturn.avatar;
             document.location.href = 'profile/index.html';
