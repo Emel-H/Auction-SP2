@@ -51,11 +51,13 @@ loginForm.addEventListener("submit", (e) => {
     const lastName = document.getElementById("LastName").value;
     const email = document.getElementById("InputEmail").value;
     const password = document.getElementById("InputPassword").value;
+    const avatar = document.getElementById("avatar").value;
 
     const user = {
         "name": firstName + "_" + lastName, 
         "email": email, 
-        "password": password
+        "password": password,
+        "avatar": avatar
       };
 
     register(user);
