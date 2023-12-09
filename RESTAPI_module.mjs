@@ -1,5 +1,6 @@
+
 const noroffLoginUrl = "https://api.noroff.dev/api/v1/auction/auth/login";
-const noroffRegisterUrl = "https://api.noroff.dev/api/v1/social/auth/register";
+const noroffRegisterUrl = "https://api.noroff.dev/api/v1/auction/auth/register";
 const noroffProfileUrl = "https://api.noroff.dev/api/v1/social/profiles/";
 const noroffPostsUrl = "https://api.noroff.dev/api/v1/social/posts/";
 
