@@ -3,15 +3,15 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="XBook registeration page"></meta>
-        <meta name="keywords" content="social media, feed, login, Xbook"></meta>
-        <title>Register | X-Book</title>
+        <meta name="description" content="MyAuction registeration page"></meta>
+        <meta name="keywords" content="auction, listings, registeration, MyA, MyAUCTION"></meta>
+        <title>Register | MyA</title>
         <link rel="stylesheet" href="/dist/css/styles.css">
     </head>
     <body>
-        <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light border-bottom">
             <div class="container-fluid">
-              <a class="navbar-brand mx-5" href="/">X-Book</a>
+              <a class="navbar-brand mx-5" href="/">My<span class="text-info">A</span>UCTION</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -23,7 +23,7 @@
                 <div class="row my-5">
                     <div class="col"></div>
                     <div class="col-sm-6">
-                        <h1 class="text-center my-1">Register your X-Book user</h1>
+                        <h1 class="text-center my-1">Register your MyAuction user</h1>
                         <p class="text-center my-1" id="userFeedback">Enter registration info below</p>
                         <form method="POST" id="RegistrationForm" class="need-validation">
                             <div class="form-group my-4">
@@ -38,16 +38,21 @@
                             </div>
                             <div class="form-group my-4">
                                 <label for="InputEmail">Email Address (User Name)</label>
-                                <input type="email" class="form-control form-control-lg" required id="InputEmail" aria-describedby="email" pattern="^[A-Za-z0-9._%+-]+(@noroff|@stud\.noroff)\.no$">
-                                <small id="email" class="form-text text-muted">You must use your @noroff.no or @stud.noroff.no email domains to register</small>
+                                <input type="email" class="form-control form-control-lg" required id="InputEmail" aria-describedby="email" pattern="^[A-Za-z0-9._%+-]+(@stud\.noroff)\.no$">
+                                <small id="email" class="form-text text-muted">You must use @stud.noroff.no email domains to register</small>
                             </div>
                             <div class="form-group my-4">
                                 <label for="InputPassword">Password</label>
                                 <input type="password" class="form-control form-control-lg" minlength="8" required id="InputPassword">
                                 <small id="password" class="form-text text-muted">For Safety, password must be a minimum of 8 characters in length</small>
                             </div>
-                            
-                            <button type="submit" id="SubmitButton" class="btn btn-primary w-100 btn-lg">Sign up</button>
+                            <div class="form-group my-4">
+                                <label for="avatar">Avatar</label>
+                                <input type="url" class="form-control form-control-lg" id="avatar">
+                                <small id="password" class="form-text text-muted">To add an avatar image to your profile, please include the image URL (optional) </small>
+                            </div>
+
+                            <button type="submit" id="SubmitButton" class="btn btn-primary w-100 btn-lg">Register</button>
                         </form>
                     </div>
                     <div class="col"></div>
