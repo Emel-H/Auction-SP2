@@ -1,4 +1,4 @@
-import{loginUser} from "./RESTAPI_module.mjs";
+import{loginUser} from "../RESTAPI_module.mjs";
 
 /**
  * function to attempt logging in, if the response is ok from the API the user information is stored in local storage and user is directed to their profile page
