@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="XBook registeration page"></meta>
+        <meta name="keywords" content="social media, feed, login, Xbook"></meta>
+        <title>Register | X-Book</title>
+        <link rel="stylesheet" href="/dist/css/styles.css">
+    </head>
+    <body>
+        <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+              <a class="navbar-brand mx-5" href="/">X-Book</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              
+            </div>
+          </nav>
+        <main>
+            <div class="container">
+                <div class="row my-5">
+                    <div class="col"></div>
+                    <div class="col-sm-6">
+                        <h1 class="text-center my-1">Register your X-Book user</h1>
+                        <p class="text-center my-1" id="userFeedback">Enter registration info below</p>
+                        <form method="POST" id="RegistrationForm" class="need-validation">
+                            <div class="form-group my-4">
+                                <label for="FirstName">First Name</label>
+                                <input type="text" class="form-control form-control-lg" required id="FirstName" aria-describedby="first name">
+                                
+                            </div>
+                            <div class="form-group my-4">
+                                <label for="LastName">Last Name</label>
+                                <input type="text" class="form-control form-control-lg" required id="LastName" aria-describedby="last name">
+                                
+                            </div>
+                            <div class="form-group my-4">
+                                <label for="InputEmail">Email Address (User Name)</label>
+                                <input type="email" class="form-control form-control-lg" required id="InputEmail" aria-describedby="email" pattern="^[A-Za-z0-9._%+-]+(@noroff|@stud\.noroff)\.no$">
+                                <small id="email" class="form-text text-muted">You must use your @noroff.no or @stud.noroff.no email domains to register</small>
+                            </div>
+                            <div class="form-group my-4">
+                                <label for="InputPassword">Password</label>
+                                <input type="password" class="form-control form-control-lg" minlength="8" required id="InputPassword">
+                                <small id="password" class="form-text text-muted">For Safety, password must be a minimum of 8 characters in length</small>
+                            </div>
+                            
+                            <button type="submit" id="SubmitButton" class="btn btn-primary w-100 btn-lg">Sign up</button>
+                        </form>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+            
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.js"> </script>
+        <script type="module" src="/register/register.js"> </script>
+    </body>
+</html>
