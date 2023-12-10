@@ -39,7 +39,7 @@ function redirect () {
  * function to specify url of login page that i want to redirect to
  */
  function myURL() {
-    document.location.href = '/index.html';
+    document.location.href = '../index.html';
  }
 
 const message = document.getElementById("userFeedback");
