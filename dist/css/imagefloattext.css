@@ -1,0 +1,22 @@
+.imagefloattext img{
+    position: absolute;
+}
+
+.floattextbox{
+    position: relative;
+    width: 80%;
+    top: 5rem;
+    left: 10%;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+@media screen and (max-width: 575px){
+    .imagefloattext img{
+        display: none;
+    }
+    .floattextbox{
+        top: 2rem;
+    }
+
+}

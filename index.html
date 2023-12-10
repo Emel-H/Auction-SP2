@@ -7,9 +7,10 @@
         <meta name="keywords" content="Auction, listings, home, bids"></meta>
         <title>Home | MyA</title>
         <link rel="stylesheet" href="/dist/css/styles.css">
+        <link rel="stylesheet" href="/dist/css/imagefloattext.css">
     </head>
     <body>
-        <nav class="navbar sticky-top navbar-expand-lg navbar-light border-bottom">
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white border-bottom">
             <div class="container-fluid">
               <a class="navbar-brand mx-5" href="/">My<span class="text-info">A</span>UCTION</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,15 +40,36 @@
             </div>
           </nav>
         <main>
-            <div class="container">
-                <div class="row my-5">
-                    <div class="col"></div>
-                    <div class="col-sm-6">
-                        <h1 class="text-center my-5">Welcome to X-Book</h1>
-                        <p class="text-center my-1" id="userFeedback">Enter login details below</p>
-                        
+            <div class="container-fluid  my-5">
+                <div class="row">
+                    <div class="col-md-5 bg-light">
+                        <p class="mt-5 px-5">It has never been easier to buy & sell at MyAuction.</p>
+                        <a class="float-end me-3 btn btn-primary">View Guide</a> 
                     </div>
-                    <div class="col"></div>
+                    <div class="col-md-7 bg-light">
+                        <img class="w-100 overflow-hidden" src="images/earrings.jpg" alt="stylistic golden earrings">  
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 bg-light">
+                        <img class="w-100 overflow-hidden" src="images/lady.jpg" alt="painting of a lady">
+                    </div>
+                    <div class="col-md-7 bg-light">
+                        <p class="mt-5 px-5">Discover vintage Art, furniture, jewelry, porcelain, handbags and much more to come.</p>
+                        <a class="float-end mb-3 me-3 btn btn-primary ">View Auctions</a>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="imagefloattext">
+                            <img class="w-100" src="images/birmingham.jpg" alt="painting of maountains">
+                            <div class="floattextbox">
+                                <p class="mt-4 pt-4 px-4">Interested in becoming a member at MyAuction?</p>
+                                <a class="my-2 mx-4 text-center btn btn-primary" href="/register">Register Here</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
