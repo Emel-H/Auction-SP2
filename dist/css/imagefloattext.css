@@ -1,11 +1,11 @@
 .imagefloattext img{
-    position: absolute;
+    position: relative;
 }
 
 .floattextbox{
     position: relative;
     width: 80%;
-    top: 5rem;
+    top: -15rem;
     left: 10%;
     border-radius: 1rem;
     background-color: rgba(255, 255, 255, 0.4);
@@ -16,7 +16,7 @@
         display: none;
     }
     .floattextbox{
-        top: 2rem;
+        top: 0rem;
     }
 
 }
