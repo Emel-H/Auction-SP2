@@ -2,7 +2,7 @@
 const noroffLoginUrl = "https://api.noroff.dev/api/v1/auction/auth/login";
 const noroffRegisterUrl = "https://api.noroff.dev/api/v1/auction/auth/register";
 const noroffProfileUrl = "https://api.noroff.dev/api/v1/social/profiles/";
-const noroffPostsUrl = "https://api.noroff.dev/api/v1/social/posts/";
+const noroffListingsUrl = "https://api.noroff.dev/api/v1/auction/listings/";
 
 /**
  * Modular function to login a user using Noroff API
@@ -60,8 +60,8 @@ async function profileInfo(username, token){
  * @param {string} token the JWT token of the user currently logged in 
  * @returns {string} API response of the DELETE post attempt
  */
-async function postDelete(id, token){
-    const response = await fetch(noroffPostsUrl+id, {
+async function listingDelete(id, token){
+    const response = await fetch(noroffListingsUrl+id, {
         method: 'DELETE',
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
@@ -77,13 +77,9 @@ async function postDelete(id, token){
  * @param {string} token the JWT token of the user currently logged in 
  * @returns {string} API response of the GET post attempt
  */
-async function postGet(id, token){
-    const response = await fetch(noroffPostsUrl+id+"?_author=true", {
+async function listingGet(id){
+    const response = await fetch(noroffListingsUrl+id+"?_seller=true&_bids=true", {
         method: 'GET',
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-            Authorization: `Bearer ${token}`,
-        },
     });
     return response;
 }
@@ -94,8 +90,8 @@ async function postGet(id, token){
  * @param {string} token the JWT token of the user currently logged in 
  * @returns {string} API response of the PUT post attempt to update a post
  */
-async function postEdit(id, token){
-    const response = await fetch(noroffPostsUrl+id, {
+async function listingEdit(id, token){
+    const response = await fetch(noroffListingsUrl+id, {
         method: 'PUT',
         body: JSON.stringify({
             title: document.getElementById("postTitle").value,
@@ -114,8 +110,8 @@ async function postEdit(id, token){
  * @param {string} token the JWT token of the user currently logged in 
  * @returns {string} API response of the POST a new post attempt
  */
-async function postNew(token){
-    const response = await fetch(noroffPostsUrl, {
+async function listingNew(token){
+    const response = await fetch(noroffListingsUrl, {
         method: 'POST',
         body: JSON.stringify({
             title: document.getElementById("postTitle").value,
@@ -129,4 +125,4 @@ async function postNew(token){
     return response;
 }
 
-export{loginUser, registerUser, profileInfo, postDelete, postGet, postEdit, postNew};
+export{loginUser, registerUser, profileInfo, listingDelete, listingGet, listingEdit, listingNew};
