@@ -9,7 +9,7 @@ async function getPosts(){
     try {
         const token = localStorage.getItem('accessToken');
         if(token==null){
-            document.location.href = '/index.html';
+            document.location.href = '../index.html';
         }else{
             let filter = getFilter();
             const response = await postGet(filter, token);
