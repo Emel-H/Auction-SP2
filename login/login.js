@@ -16,7 +16,9 @@ async function login(user){
             localStorage.credits = jsonReturn.credits;
             localStorage.accessToken = jsonReturn.accessToken;
             localStorage.avatar = jsonReturn.avatar;
+            console.log(document.location.href);
             document.location.href = '../index.html';
+            console.log(document.location.href);
         }
         else{
             const message = document.getElementById("userFeedback");
