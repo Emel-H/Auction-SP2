@@ -7,32 +7,95 @@
         <meta name="keywords" content="Auction, listings, home, bids"></meta>
         <title>Home | MyA</title>
         <link rel="stylesheet" href="/dist/css/styles.css">
+        <link rel="stylesheet" href="/dist/css/imagefloattext.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     </head>
     <body>
-        <nav class="navbar sticky-top navbar-expand-lg navbar-light ">
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white border-bottom">
             <div class="container-fluid">
               <a class="navbar-brand mx-5" href="/">My<span class="text-info">A</span>UCTION</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-              
+              <div class="collapse navbar-collapse justify-content-end mx-5" id="navbarSupportedContent">
+                <ul class="navbar-nav mb-2 mb-lg-0 ">
+                  <li class="nav-item">
+                    <a class="nav-link" id="profile-nav" href="/profile">Profile</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/listings">Auctions</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/guide">Guide</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/about">About</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class=" btn btn-primary" id="login-nav" aria-current="page" href="/login">Log In</a>
+                    <button id="logout-nav" class=" btn btn-primary">Log Out</button>
+                  </li>
+                </ul>
+                
+              </div>
             </div>
           </nav>
         <main>
-            <div class="container">
-                <div class="row my-5">
-                    <div class="col"></div>
-                    <div class="col-sm-6">
-                        <h1 class="text-center my-5">Welcome to X-Book</h1>
-                        <p class="text-center my-1" id="userFeedback">Enter login details below</p>
-                        
+            <div class="container-fluid  my-5">
+                <div class="row">
+                    <div class="col-md-5 bg-light">
+                        <p class="mt-5 px-5">It has never been easier to buy & sell at MyAuction.</p>
+                        <a class="float-end me-3 btn btn-primary">View Guide</a> 
                     </div>
-                    <div class="col"></div>
+                    <div class="col-md-7 bg-light">
+                        <img class="w-100 overflow-hidden" src="images/earrings.jpg" alt="stylistic golden earrings">  
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 bg-light">
+                        <img class="w-100 overflow-hidden" src="images/lady.jpg" alt="painting of a lady">
+                    </div>
+                    <div class="col-md-7 bg-light">
+                        <p class="mt-5 px-5">Discover vintage Art, furniture, jewelry, porcelain, handbags and much more to come.</p>
+                        <a class="float-end mb-3 me-3 btn btn-primary ">View Auctions</a>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="imagefloattext">
+                            <img class="w-100" src="images/birmingham.jpg" alt="painting of maountains">
+                            <div class="floattextbox">
+                                <p class="mt-4 pt-4 px-4">Interested in becoming a member at MyAuction?</p>
+                                <a class="my-2 mx-4 text-center btn btn-primary" href="/register">Register Here</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
         </main>
+        <footer>
+            <div class="container-fluid my-5">
+                <div class="row">
+                    <div class="col-md bg-light">
+                        <p class="text-white mt-3 mx-5">MyAuction Company Ltd.</p>
+                        <p class="text-white mt-3 mx-5">Phone: +47 51 055 050</p>
+                        <p class="text-white mt-3 mx-5">Email: <a class="text-white" href="mailto:contact@myauction.net">contact@myauction.net</a></p>
+                    </div>
+                    <div class="col-md bg-light text-center">
+                        <a class="btn btn-white pt-5" href="www.facebook.com"><h1><i class="bi bi-facebook text-white"></i></h1></a>
+                        <a class="btn btn-white pt-5" href="www.instagram.com"><h1><i class="bi bi-instagram text-white"></i></h1></a>
+                        <a class="btn btn-white pt-5" href="www.twitter.com"><h1><i class="bi bi-twitter text-white"></i></h1></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md bg-light">
+                        <p class="text-center text-white">&copy; 2023 MyAUCTION</p>
+                    </div>
+                </div>
+        </footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.js"> </script>
-        
+        <script type="module" src="/nav.js"> </script>
     </body>
 </html>
