@@ -29,6 +29,7 @@ async function getlistings(){
  * @param {JSON} jsonReturn the json returned from the API call attempt with data on filtered posts
  */
 function getListingsArray(jsonReturn){
+    const token = localStorage.getItem('accessToken');
     listingsArray = new Array();
     const listingPosts = jsonReturn;
     listingPosts.forEach(element => {
@@ -40,7 +41,8 @@ function getListingsArray(jsonReturn){
         postTitle.innerHTML = element.title;
         cardHeader.append(postTitle);
         const postOwner = document.createElement("a");
-        postOwner.href = "../profile/index.html?user="+element.seller.name;
+        if(token==null||token==""){}
+        else{postOwner.href = "../profile/index.html?user="+element.seller.name;}
         postOwner.innerHTML = "Created by "+element.seller.name;
         cardHeader.append(postOwner);
         const postDate = document.createElement("p");
@@ -59,12 +61,20 @@ function getListingsArray(jsonReturn){
         postBody.className = "card-text";
         postBody.innerHTML = "Description:<br>"+element.description;
         cardBody.append(postBody);
-        if(element._count.bids>0)
-        {
+        if(token==null||token==""){
             const postBodyBids = document.createElement("p");
-            postBodyBids.className = "card-text text-info";
-            postBodyBids.innerHTML = "Bids: "+element._count.bids + "<br> Latest Bid: " + element.bids[element._count.bids-1].amount + " creadit(s) by: " +element.bids[element._count.bids-1].bidderName ;
+            postBodyBids.className = "card-text text-warning";
+            postBodyBids.innerHTML = "Bids can only be placed or viewed by registered users, please login or register to get the full experience";
             cardBody.append(postBodyBids);
+        }
+        else{
+            if(element._count.bids>0)
+            {
+                const postBodyBids = document.createElement("p");
+                postBodyBids.className = "card-text text-info";
+                postBodyBids.innerHTML = "Bids: "+element._count.bids + "<br> Latest Bid: " + element.bids[element._count.bids-1].amount + " creadit(s) by: " +element.bids[element._count.bids-1].bidderName ;
+                cardBody.append(postBodyBids);
+            }
         }
         const readMore = document.createElement("a");
         readMore.href = "../post/?id="+element.id+"&edit=false";

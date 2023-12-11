@@ -6,26 +6,21 @@ import{listingGet, listingEdit, listingNew} from "../RESTAPI_module.mjs";
  */
 async function getPost(id){
     try {
-        const token = localStorage.getItem('accessToken');
-        if(token==null){
-            document.location.href = '../';
-        }else{
-            if(newEntry==="true"){
-                setPostNew();
-            }
-            else{
-                const response = await listingGet(id, token);
-                const jsonReturn = await response.json();
+        if(newEntry==="true"){
+            setPostNew();
+        }
+        else{
+            const response = await listingGet(id);
+            const jsonReturn = await response.json();
+            
+            if(response.ok){
                 
-                if(response.ok){
-                    
-                    if(edit==="true"){
-                        setPostEdit(jsonReturn);
-                    } else {
-                        setPostView(jsonReturn);
-                    }
-                    
+                if(edit==="true"){
+                    setPostEdit(jsonReturn);
+                } else {
+                    setPostView(jsonReturn);
                 }
+                
             }
         }
     }
@@ -232,6 +227,8 @@ function setPostEdit(jsonReturn){
  * @param {JSON} jsonReturn the json returned from the API call attempt with data on this specific post
  */
 function setPostView(jsonReturn){
+    const token = localStorage.getItem('accessToken');
+
     const post = document.getElementById("singlePost");
     const card = document.createElement("div");
     card.className = "card my-2";
@@ -242,8 +239,10 @@ function setPostView(jsonReturn){
     postTitle.innerHTML = jsonReturn.title;
     cardHeader.append(postTitle);
     const postOwner = document.createElement("a");
-    postOwner.href = "../profile/index.html?user="+jsonReturn.seller.name;
+    if(token==null||token==""){postOwner.href = "";}
+    else{postOwner.href = "../profile/index.html?user="+jsonReturn.seller.name;}
     postOwner.innerHTML = "Created by "+jsonReturn.seller.name;
+    
     cardHeader.append(postOwner);
     const postDate = document.createElement("p");
     postDate.innerHTML = "Expires: " + new Date(jsonReturn.endsAt).toLocaleDateString("en-UK");
@@ -258,7 +257,13 @@ function setPostView(jsonReturn){
     postBody.className = "card-text my-4";
     postBody.innerHTML = "Description: <br>"+jsonReturn.description;
     cardBody.append(postBody);
-    const postBids = addBids(cardBody, jsonReturn.bids);
+    let postBids = addBids(cardBody, jsonReturn.bids);
+    
+    if(token==null||token==""){
+        postBids = document.createElement("p");
+        postBids.className = "text-warning";
+        postBids.innerHTML = "Bids can only be placed or viewed by registered users, please login or register to get the full experience";
+    }
     cardBody.append(postBids);
     
     card.append(cardBody);
