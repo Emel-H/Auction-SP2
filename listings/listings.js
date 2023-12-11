@@ -44,7 +44,7 @@ function getListingsArray(jsonReturn){
         postOwner.innerHTML = "Created by "+element.seller.name;
         cardHeader.append(postOwner);
         const postDate = document.createElement("p");
-        postDate.innerHTML = new Date(element.updated);
+        postDate.innerHTML = new Date(element.updated).toLocaleDateString("en-UK");
         cardHeader.append(postDate);
         card.append(cardHeader);
         const cardBody = document.createElement("div");
@@ -69,7 +69,7 @@ function getListingsArray(jsonReturn){
         const readMore = document.createElement("a");
         readMore.href = "../post/?id="+element.id+"&edit=false";
         readMore.className = "btn btn-light";
-        readMore.innerHTML = "Read more";
+        readMore.innerHTML = "View";
         cardBody.append(readMore);
         card.append(cardBody);
         listingsArray.push(card); 

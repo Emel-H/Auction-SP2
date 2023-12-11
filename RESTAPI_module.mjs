@@ -78,7 +78,7 @@ async function listingDelete(id, token){
  * @returns {string} API response of the GET post attempt
  */
 async function listingGet(id){
-    const response = await fetch(noroffListingsUrl+id+"?_seller=true&_bids=true", {
+    const response = await fetch(noroffListingsUrl+id+"?_seller=true&_bids=true&-active=true", {
         method: 'GET',
     });
     return response;
@@ -95,7 +95,8 @@ async function listingEdit(id, token){
         method: 'PUT',
         body: JSON.stringify({
             title: document.getElementById("postTitle").value,
-            body: document.getElementById("postBody").value,
+            description: document.getElementById("postBody").value,
+            media: document.getElementById("postMedia").value.split(','),
         }),
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
@@ -115,7 +116,9 @@ async function listingNew(token){
         method: 'POST',
         body: JSON.stringify({
             title: document.getElementById("postTitle").value,
-            body: document.getElementById("postBody").value,
+            description: document.getElementById("postBody").value,
+            media: document.getElementById("postMedia").value.split(','),
+            endsAt: new Date(document.getElementById("postDate").value),
         }),
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
