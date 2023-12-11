@@ -1,7 +1,7 @@
 
 const noroffLoginUrl = "https://api.noroff.dev/api/v1/auction/auth/login";
 const noroffRegisterUrl = "https://api.noroff.dev/api/v1/auction/auth/register";
-const noroffProfileUrl = "https://api.noroff.dev/api/v1/social/profiles/";
+const noroffProfileUrl = "https://api.noroff.dev/api/v1/auction/profiles/";
 const noroffListingsUrl = "https://api.noroff.dev/api/v1/auction/listings/";
 
 /**
@@ -43,7 +43,7 @@ async function registerUser(user){
  * @returns {string} API response of the GET profile attempt
  */
 async function profileInfo(username, token){
-    const response = await fetch(noroffProfileUrl+username+"?_posts=true&_followers=true&_following=true", {
+    const response = await fetch(noroffProfileUrl+username+"?_listings=true", {
         method: 'GET',
         headers: {
             'Content-type': 'application/json; charset=UTF-8',

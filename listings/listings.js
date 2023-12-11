@@ -46,8 +46,8 @@ function getListingsArray(jsonReturn){
         const cardBody = document.createElement("div");
         cardBody.className = "card-body";
         const postBodyImage = document.createElement("img");
-        postBodyImage.className = "card-text";
-        postBodyImage.href = element.media[0];
+        postBodyImage.className = "card-text img-thumbnail";
+        postBodyImage.src = element.media[0];
         cardBody.append(postBodyImage);
         const postBody = document.createElement("p");
         postBody.className = "card-text";

@@ -1,4 +1,4 @@
-import{profileInfo, postDelete} from "../RESTAPI_module.mjs";
+import{profileInfo, listingDelete} from "../RESTAPI_module.mjs";
 
 /**
  * function to attempt to get a user profile, if the response is ok from the API the user information is then populated in various sections on the profile page
@@ -8,7 +8,7 @@ async function getProfile(username){
     try {
         const token = localStorage.getItem('accessToken');
         if(token==null){
-            document.location.href = '/index.html';
+            document.location.href = '../';
         }else{
             const response = await profileInfo(username,token);
             const jsonReturn = await response.json();
@@ -17,9 +17,10 @@ async function getProfile(username){
                 getProfileName(jsonReturn);
                 getProfileAvatar(jsonReturn);
                 getProfileEmail(jsonReturn);
-                getProfileFollowers(jsonReturn);
-                getProfileFollowing(jsonReturn);
-                getProfilePosts(jsonReturn);
+                getProfileCredits(jsonReturn);
+                getProfileWins(jsonReturn);
+                enableCreateListing(username);
+                getProfileListings(jsonReturn);
             }
         }
     }
@@ -30,19 +31,29 @@ async function getProfile(username){
 }
 
 /**
+ * function to enable the create new listing button if you are viewing your profile
+ * @param {string} username the current username of the profile viewed 
+ */
+function enableCreateListing(username){
+    if(username===localStorage.getItem("username")){
+        addListingButton.className = "btn btn-primary col-4";
+    }
+}
+
+/**
  * function to delete a post
  * @param {number} id identifier of the post to be deleted 
  */
-async function deletePost(id){
+async function deleteListing(id){
     try {
         const token = localStorage.getItem('accessToken');
         if(token==null){
-            document.location.href = '/index.html';
+            document.location.href = '../';
         }else{
-            const response = await postDelete(id, token);
+            const response = await listingDelete(id, token);
             const jsonReturn = await response.json();
             if(response.ok){
-                document.location.href = '/profile/index.html';
+                document.location.href = '../profile/index.html';
             }
         }
     }
@@ -67,11 +78,11 @@ function getProfileName(jsonReturn){
  */
 function getProfileAvatar(jsonReturn){
     const profileImage = document.getElementById("profileImage");
-    if(jsonReturn.avatar !=null){
+    if(jsonReturn.avatar !=""){
         profileImage.src = jsonReturn.avatar;
     }
     else{
-        profileImage.src = "/images/profile.png";
+        profileImage.src = "../images/profile.png";
     }
 }
 
@@ -88,92 +99,62 @@ function getProfileEmail(jsonReturn){
  * function to populate the profile followers by itterating over the list 
  * @param {JSON} jsonReturn the json returned from the API call attempt 
  */
-function getProfileFollowers(jsonReturn){
-    const followers = document.getElementById("profileFollowers");
-    const profileFollowers = jsonReturn.followers;
-    profileFollowers.forEach(element => {
-        const followerlink = document.createElement("a");
-        followerlink.href = "/profile/index.html?user="+element.name;
-        const followerImg = document.createElement("img");
-        followerImg.className = "img-fluid img-thumbnail my-2 w-100";
-        if(element.avatar != null){
-            followerImg.src = element.avatar
-        }
-        else{
-            followerImg.src = "/images/profile.png";
-        }
-        followerImg.alt = "profile image "+element.name;
-        followerlink.append(followerImg);
-        followers.append(followerlink);
-    });
+function getProfileCredits(jsonReturn){
+    const credits = document.getElementById("profileCredits");
+    credits.innerHTML += jsonReturn.credits;
 }
 
 /**
  * function to populate the profile followering by itterating over the list 
  * @param {JSON} jsonReturn the json returned from the API call attempt 
  */
-function getProfileFollowing(jsonReturn){
-    const following = document.getElementById("profileFollowing");
-    const profileFollowing = jsonReturn.following;
-    profileFollowing.forEach(element => {
-        const followinglink = document.createElement("a");
-        followinglink.href = "/profile/index.html?user="+element.name;
-        const followingImg = document.createElement("img");
-        followingImg.className = "img-fluid img-thumbnail my-2 w-100";
-        if(element.avatar != null){
-            followingImg.src = element.avatar
-        }
-        else{
-            followingImg.src = "/images/profile.png";
-        }
-        followingImg.alt = "profile image "+element.name;
-        followinglink.append(followingImg);
-        following.append(followinglink);
-    });
+function getProfileWins(jsonReturn){
+    const wins = document.getElementById("profileWins");
+    wins.innerHTML += jsonReturn.wins.length;
 }
 
 /**
  * function to populate the profile posts by itterating over the list. if this happens to by posts by the logged in user, edit and delete options are added in the form of buttons  
  * @param {JSON} jsonReturn the json returned from the API call attempt 
  */
-function getProfilePosts(jsonReturn){
-    const posts = document.getElementById("profilePosts");
-    const addPostButton = document.getElementById("addPostButton");
-    const profilePosts = jsonReturn.posts;
-    profilePosts.forEach(element => {
+function getProfileListings(jsonReturn){
+    const listings = document.getElementById("profileListings");
+    const addListingButton = document.getElementById("addListingButton");
+    const profileListings = jsonReturn.listings;
+    profileListings.forEach(element => {
         const card = document.createElement("div");
         card.className = "card my-2";
         const cardHeader = document.createElement("div");
         cardHeader.className = "card-header";
-        const postTitle = document.createElement("h4");
-        postTitle.innerHTML = element.title;
-        cardHeader.append(postTitle);
-        const postOwner = document.createElement("p");
-        postOwner.innerHTML = "posted by "+element.owner + " on " + new Date(element.updated);
-        cardHeader.append(postOwner);
+        const listingTitle = document.createElement("h4");
+        listingTitle.innerHTML = element.title;
+        cardHeader.append(listingTitle);
+        const listingUpdateDate = document.createElement("p");
+        listingUpdateDate.innerHTML = "last update" + new Date(element.updated);
+        cardHeader.append(listingUpdateDate);
         card.append(cardHeader);
         const cardBody = document.createElement("div");
         cardBody.className = "card-body";
-        const postBody = document.createElement("p");
-        postBody.className = "card-text";
-        postBody.innerHTML = element.body;
-        cardBody.append(postBody);
+        const listingDescription = document.createElement("p");
+        listingDescription.className = "card-text";
+        listingDescription.innerHTML = "Description: <br>"+element.description;
+        cardBody.append(listingDescription);
         if(username===localStorage.getItem("username")){
-            addPostButton.className = "btn btn-primary w-100 my-2 d-block";
+            addListingButton.className = "btn btn-primary col-4";
             const edit = document.createElement("a");
             edit.href = "../post/?id="+element.id+"&edit=true";
-            edit.className = "btn btn-light";
+            edit.className = "btn btn-info";
             edit.innerHTML = "Edit";
             cardBody.append(edit);
             const deleteButton =  document.createElement("button");
             deleteButton.type = "button";
             deleteButton.className = "btn btn-dark float-end";
             deleteButton.innerHTML = "Delete";
-            deleteButton.addEventListener("click", (e) => {deletePost(element.id);});
+            deleteButton.addEventListener("click", (e) => {deleteListing(element.id);});
             cardBody.append(deleteButton);
         }
         card.append(cardBody);
-        posts.append(card); 
+        listings.append(card); 
     });
 }
 
