@@ -170,11 +170,16 @@ function getProfileListings(jsonReturn){
         listingDescription.className = "card-text";
         listingDescription.innerHTML = "Description: <br>"+element.description;
         cardBody.append(listingDescription);
+        const readMore = document.createElement("a");
+        readMore.href = "../post/?id="+element.id+"&edit=false";
+        readMore.className = "btn btn-light";
+        readMore.innerHTML = "View";
+        cardBody.append(readMore);
         if(username===localStorage.getItem("username")){
             addListingButton.className = "btn btn-primary col-4";
             const edit = document.createElement("a");
             edit.href = "../post/?id="+element.id+"&edit=true";
-            edit.className = "btn btn-info";
+            edit.className = "btn btn-info mx-2";
             edit.innerHTML = "Edit";
             cardBody.append(edit);
             const deleteButton =  document.createElement("button");
@@ -183,13 +188,6 @@ function getProfileListings(jsonReturn){
             deleteButton.innerHTML = "Delete";
             deleteButton.addEventListener("click", (e) => {deleteListing(element.id);});
             cardBody.append(deleteButton);
-        }
-        else{
-            const readMore = document.createElement("a");
-            readMore.href = "../post/?id="+element.id+"&edit=false";
-            readMore.className = "btn btn-light";
-            readMore.innerHTML = "Read more";
-            cardBody.append(readMore);
         }
         card.append(cardBody);
         listings.append(card); 
