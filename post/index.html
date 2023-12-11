@@ -3,15 +3,16 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="XBook login page"></meta>
-        <meta name="keywords" content="social media, feed, login, Xbook"></meta>
-        <title>Post | X-Book</title>
+        <meta name="description" content="MyAuction listing post page"></meta>
+        <meta name="keywords" content="auction, listings, post, MyAuction"></meta>
+        <title>Listing Post | MyA</title>
         <link rel="stylesheet" href="../dist/css/styles.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     </head>
     <body>
       <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white border-bottom">
         <div class="container-fluid">
-          <a class="navbar-brand mx-5" href="/">My<span class="text-info">A</span>UCTION</a>
+          <a class="navbar-brand mx-5" href="../">My<span class="text-info">A</span>UCTION</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -54,8 +55,28 @@
             
             
         </main>
+        <footer>
+          <div class="container-fluid my-5">
+              <div class="row">
+                  <div class="col-md bg-light">
+                      <p class="text-white mt-3 mx-5">MyAuction Company Ltd.</p>
+                      <p class="text-white mt-3 mx-5">Phone: +47 51 055 050</p>
+                      <p class="text-white mt-3 mx-5">Email: <a class="text-white" href="mailto:contact@myauction.net">contact@myauction.net</a></p>
+                  </div>
+                  <div class="col-md bg-light text-center">
+                      <a class="btn btn-white pt-5" href="www.facebook.com"><h1><i class="bi bi-facebook text-white"></i></h1></a>
+                      <a class="btn btn-white pt-5" href="www.instagram.com"><h1><i class="bi bi-instagram text-white"></i></h1></a>
+                      <a class="btn btn-white pt-5" href="www.twitter.com"><h1><i class="bi bi-twitter text-white"></i></h1></a>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md bg-light">
+                      <p class="text-center text-white">&copy; 2023 MyAUCTION</p>
+                  </div>
+              </div>
+      </footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.js"> </script>
-        <script type="module" src="../post/post.js"> </script>
+        <script type="module" src="post.js"> </script>
         <script type="module" src="../nav.js"> </script>
     </body>
 </html>

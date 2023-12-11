@@ -77,7 +77,6 @@ async function deleteListing(id){
             document.location.href = '../';
         }else{
             const response = await listingDelete(id, token);
-            const jsonReturn = await response.json();
             if(response.ok){
                 document.location.href = '../profile/index.html';
             }

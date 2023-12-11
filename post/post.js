@@ -1,4 +1,4 @@
-import{postGet, postEdit, postNew} from "../RESTAPI_module.mjs";
+import{listingGet, listingEdit, listingNew} from "../RESTAPI_module.mjs";
 
 /**
  * function to get a specific post, based on the request you will get a new post adding view, or an edit option or simply view option for the post
@@ -14,7 +14,7 @@ async function getPost(id){
                 setPostNew();
             }
             else{
-                const response = await postGet(id, token);
+                const response = await listingGet(id, token);
                 const jsonReturn = await response.json();
                 
                 if(response.ok){
@@ -43,12 +43,14 @@ async function editPost(id){
     try {
         const token = localStorage.getItem('accessToken');
         if(token==null){
-            document.location.href = '/index.html';
+            document.location.href = '../';
         }else{
-            const response = await postEdit(id, token);
-            const jsonReturn = await response.json();
+            const response = await listingEdit(id, token);
             if(response.ok){
-                document.location.href = '/profile/index.html';
+                document.location.href = '../profile';
+            }
+            else{
+                alert("Please check your inputs and fill in required field before submitting");
             }
         }
     }
@@ -65,12 +67,14 @@ async function newPost(){
     try {
         const token = localStorage.getItem('accessToken');
         if(token==null){
-            document.location.href = '/index.html';
+            document.location.href = '../';
         }else{
-            const response = await postNew(token);
-            const jsonReturn = await response.json();
+            const response = await listingNew(token);
             if(response.ok){
-                document.location.href = '/profile/index.html';
+                document.location.href = '../profile';
+            }
+            else{
+                alert("Please check your inputs and fill in required field before submitting");
             }
         }
     }
@@ -86,6 +90,7 @@ async function newPost(){
 function setPostNew(){
     const post = document.getElementById("singlePost");
     const form = document.createElement("form");
+    form.addEventListener('submit', (e) => {e.preventDefault();});
     form.onkeydown = "return event.key != 'Enter';";
 
     const title = document.createElement("div");
@@ -99,6 +104,18 @@ function setPostNew(){
     title.append(titleLabel);
     title.append(postTitle);
 
+    const date = document.createElement("div");
+    date.className = "form-group my-2";
+    const dateLabel = document.createElement("label");
+    dateLabel.innerHTML = "Expiration Date:";
+    const postDate = document.createElement("input");
+    postDate.type = "date";
+    postDate.className = "form-control";
+    postDate.id= "postDate";
+    postDate.required = true;
+    date.append(dateLabel);
+    date.append(postDate);
+
     const body = document.createElement("div");
     body.className = "form-group my-2";
     const bodyLabel = document.createElement("label");
@@ -111,13 +128,14 @@ function setPostNew(){
     body.append(postBody);
 
     const submitNew =  document.createElement("button");
-    submitNew.type = "button";
+    submitNew.type = "submit";
     submitNew.id = "submitNew";
     submitNew.className = "btn btn-light w-100 btn-lg my-2 mb-5";
     submitNew.innerHTML = "Submit New";
     submitNew.addEventListener("click", (e) => {newPost();});
 
     form.append(title);
+    form.append(date);
     form.append(body);
     form.append(submitNew);
 
@@ -132,6 +150,8 @@ function setPostNew(){
 function setPostEdit(jsonReturn){
     const post = document.getElementById("singlePost");
     const form = document.createElement("form");
+    form.className = "need-validation";
+    form.addEventListener('submit', (e) => {e.preventDefault();});
     form.onkeydown = "return event.key != 'Enter';";
 
     const title = document.createElement("div");
@@ -142,6 +162,7 @@ function setPostEdit(jsonReturn){
     postTitle.type = "text";
     postTitle.className = "form-control";
     postTitle.id= "postTitle";
+    postTitle.required = true;
     postTitle.value = jsonReturn.title;
     title.append(titleLabel);
     title.append(postTitle);
@@ -154,15 +175,15 @@ function setPostEdit(jsonReturn){
     postBody.type = "textarea";
     postBody.className = "form-control";
     postBody.id = "postBody";
-    postBody.value = jsonReturn.body;
+    postBody.value = jsonReturn.description;
     body.append(bodyLabel);
     body.append(postBody);
 
     const submitEdit =  document.createElement("button");
-    submitEdit.type = "button";
+    submitEdit.type = "submit";
     submitEdit.id = "submitEdit";
     submitEdit.className = "btn btn-light w-100 btn-lg my-2 mb-5";
-    submitEdit.innerHTML = "Submit Edit";
+    submitEdit.innerHTML = "Submit Edits";
     submitEdit.addEventListener("click", (e) => {editPost(id);});
 
     form.append(title);

@@ -95,7 +95,7 @@ async function listingEdit(id, token){
         method: 'PUT',
         body: JSON.stringify({
             title: document.getElementById("postTitle").value,
-            body: document.getElementById("postBody").value,
+            description: document.getElementById("postBody").value,
         }),
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
@@ -115,7 +115,8 @@ async function listingNew(token){
         method: 'POST',
         body: JSON.stringify({
             title: document.getElementById("postTitle").value,
-            body: document.getElementById("postBody").value,
+            description: document.getElementById("postBody").value,
+            endsAt: new Date(document.getElementById("postDate").value),
         }),
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
