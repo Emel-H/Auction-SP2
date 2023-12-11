@@ -1,4 +1,4 @@
-import{profileInfo, listingDelete} from "../RESTAPI_module.mjs";
+import{profileInfo, listingDelete, avatarUpdate} from "../RESTAPI_module.mjs";
 
 /**
  * function to attempt to get a user profile, if the response is ok from the API the user information is then populated in various sections on the profile page
@@ -19,7 +19,7 @@ async function getProfile(username){
                 getProfileEmail(jsonReturn);
                 getProfileCredits(jsonReturn);
                 getProfileWins(jsonReturn);
-                enableCreateListing(username);
+                enableCreateListingAndUpdateAvatar(username);
                 getProfileListings(jsonReturn);
             }
         }
@@ -34,9 +34,35 @@ async function getProfile(username){
  * function to enable the create new listing button if you are viewing your profile
  * @param {string} username the current username of the profile viewed 
  */
-function enableCreateListing(username){
+function enableCreateListingAndUpdateAvatar(username){
     if(username===localStorage.getItem("username")){
         addListingButton.className = "btn btn-primary col-4";
+        updateAvatarForm.className = "";
+        updateAvatarButton.addEventListener("click", (e) => {updateAvatar(username);});
+    }
+}
+
+/**
+ * function to update avatar of your profile
+ * @param {string} username the user to update the image of 
+ */
+async function updateAvatar(username){
+    try {
+        const url = document.getElementById("avatarUrlInput").value;
+        const token = localStorage.getItem('accessToken');
+        const response = await avatarUpdate(url, username, token);
+        const jsonReturn = await response.json();
+        if(response.ok){
+            document.location.href = '../profile/index.html';
+        }
+        else{
+            alert("Not a valid URL image for your avatar, please try again ");
+            console.log(response);
+        }
+    }
+    catch (error) {
+        // catches errors both in fetch and response.json
+        console.log(error);
     }
 }
 
@@ -130,11 +156,17 @@ function getProfileListings(jsonReturn){
         listingTitle.innerHTML = element.title;
         cardHeader.append(listingTitle);
         const listingUpdateDate = document.createElement("p");
-        listingUpdateDate.innerHTML = "last update" + new Date(element.updated);
+        listingUpdateDate.innerHTML = "last updated: " + new Date(element.updated);
         cardHeader.append(listingUpdateDate);
         card.append(cardHeader);
         const cardBody = document.createElement("div");
         cardBody.className = "card-body";
+        if(element.media.length>0){
+            const postBodyImage = document.createElement("img");
+            postBodyImage.className = "card-text img-thumbnail";
+            postBodyImage.src = element.media[0];
+            cardBody.append(postBodyImage);
+        }
         const listingDescription = document.createElement("p");
         listingDescription.className = "card-text";
         listingDescription.innerHTML = "Description: <br>"+element.description;
@@ -152,6 +184,13 @@ function getProfileListings(jsonReturn){
             deleteButton.innerHTML = "Delete";
             deleteButton.addEventListener("click", (e) => {deleteListing(element.id);});
             cardBody.append(deleteButton);
+        }
+        else{
+            const readMore = document.createElement("a");
+            readMore.href = "../post/?id="+element.id+"&edit=false";
+            readMore.className = "btn btn-light";
+            readMore.innerHTML = "Read more";
+            cardBody.append(readMore);
         }
         card.append(cardBody);
         listings.append(card); 

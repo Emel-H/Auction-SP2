@@ -125,4 +125,24 @@ async function listingNew(token){
     return response;
 }
 
-export{loginUser, registerUser, profileInfo, listingDelete, listingGet, listingEdit, listingNew};
+/**
+ * Modular function to update a given user avatar using Noroff API
+ * @param {string} url the identifier of the new image  
+ * @param {string} username the identifier of the user
+ * @returns {string} API response of the PUT post attempt to update a post
+ */
+async function avatarUpdate(url, username, token){
+    const response = await fetch(noroffProfileUrl+username+"/media", {
+        method: 'PUT',
+        body: JSON.stringify({
+            "avatar" : url,
+        }),
+        headers: { 
+            'Content-type': 'application/json; charset=UTF-8',
+            Authorization: `Bearer ${token}`,
+        }, 
+    });
+    return response;
+}
+
+export{loginUser, registerUser, profileInfo, listingDelete, listingGet, listingEdit, listingNew, avatarUpdate};

@@ -39,16 +39,22 @@ function getListingsArray(jsonReturn){
         const postTitle = document.createElement("h4");
         postTitle.innerHTML = element.title;
         cardHeader.append(postTitle);
-        const postOwner = document.createElement("p");
-        postOwner.innerHTML = "Created by "+element.seller.name + " <br> " + new Date(element.updated);
+        const postOwner = document.createElement("a");
+        postOwner.href = "../profile/index.html?user="+element.seller.name;
+        postOwner.innerHTML = "Created by "+element.seller.name;
         cardHeader.append(postOwner);
+        const postDate = document.createElement("p");
+        postDate.innerHTML = new Date(element.updated);
+        cardHeader.append(postDate);
         card.append(cardHeader);
         const cardBody = document.createElement("div");
         cardBody.className = "card-body";
-        const postBodyImage = document.createElement("img");
-        postBodyImage.className = "card-text img-thumbnail";
-        postBodyImage.src = element.media[0];
-        cardBody.append(postBodyImage);
+        if(element.media.length>0){
+            const postBodyImage = document.createElement("img");
+            postBodyImage.className = "card-text img-thumbnail";
+            postBodyImage.src = element.media[0];
+            cardBody.append(postBodyImage);
+        }
         const postBody = document.createElement("p");
         postBody.className = "card-text";
         postBody.innerHTML = "Description:<br>"+element.description;
