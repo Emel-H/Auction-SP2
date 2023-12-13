@@ -46,14 +46,14 @@ function getListingsArray(jsonReturn){
         postOwner.innerHTML = "Created by "+element.seller.name;
         cardHeader.append(postOwner);
         const postDate = document.createElement("p");
-        postDate.innerHTML = new Date(element.updated).toLocaleDateString("en-UK");
+        postDate.innerHTML = new Date(element.endsAt).toLocaleDateString("en-UK");
         cardHeader.append(postDate);
         card.append(cardHeader);
         const cardBody = document.createElement("div");
         cardBody.className = "card-body row";
         if(element.media.length>0){
             const postBodyImage = document.createElement("img");
-            postBodyImage.className = "card-text img-fluid col-3 my-1 rounded";
+            postBodyImage.className = "col-5 my-1 ";
             postBodyImage.src = element.media[0];
             cardBody.append(postBodyImage);
         }
