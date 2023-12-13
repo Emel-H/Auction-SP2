@@ -1,4 +1,4 @@
-import{listingGet, listingEdit, listingNew} from "../RESTAPI_module.mjs";
+import{listingGet, listingEdit, listingNew, bidSubmit} from "../RESTAPI_module.mjs";
 
 /**
  * function to get a specific post, based on the request you will get a new post adding view, or an edit option or simply view option for the post
@@ -41,11 +41,12 @@ async function editPost(id){
             document.location.href = '../';
         }else{
             const response = await listingEdit(id, token);
+            const jsonReturn = await response.json();
             if(response.ok){
                 document.location.href = '../profile';
             }
             else{
-                alert("Please check your inputs and fill in required field before submitting");
+                alert(jsonReturn.errors[0].message);
             }
         }
     }
@@ -65,16 +66,40 @@ async function newPost(){
             document.location.href = '../';
         }else{
             const response = await listingNew(token);
+            const jsonReturn = await response.json();
             if(response.ok){
                 document.location.href = '../profile';
             }
             else{
-                alert("Please check your inputs and fill in required field before submitting");
+                alert(jsonReturn.errors[0].message);
             }
         }
     }
     catch (error) {
         // catches errors both in fetch and response.json
+        console.log(error);
+    }
+}
+
+async function submitBids(id){
+    try {
+        const token = localStorage.getItem('accessToken');
+        if(token==null){
+            document.location.href = '../';
+        }else{
+            const response = await bidSubmit(id, token);
+            const jsonReturn = await response.json();
+            if(response.ok){
+                document.location.href = '../profile';
+            }
+            else{
+                alert(jsonReturn.errors[0].message);
+            }
+        }
+    }
+    catch (error) {
+        // catches errors both in fetch and response.json
+        
         console.log(error);
     }
 }
@@ -257,10 +282,11 @@ function setPostView(jsonReturn){
     postBody.className = "card-text my-4";
     postBody.innerHTML = "Description: <br>"+jsonReturn.description;
     cardBody.append(postBody);
-    let postBids = addBids(cardBody, jsonReturn.bids);
     
+    placeBid(token, cardBody, id);
+
+    let postBids = addBids(jsonReturn.bids);
     if(token==null||token==""){
-        postBids = document.createElement("p");
         postBids.className = "text-warning";
         postBids.innerHTML = "Bids can only be placed or viewed by registered users, please login or register to get the full experience";
     }
@@ -270,10 +296,57 @@ function setPostView(jsonReturn){
     post.append(card); 
 }
 
-function addBids(cardBody, bidslist){
+/**
+ * function to populate add ability to place a bid on an item 
+ * @param {string} token a users login token
+ * @param {object} cardBody a reference to where the carousel is to be placed
+ * @param {Array} media an array of media URLs 
+ */
+function placeBid(token, cardBody, id){
+    if(token!=null||token!=""){
+        const bidLabel = document.createElement("p");
+        bidLabel.className = "text-info";
+        bidLabel.innerHTML = "Place Your Bid Here:";
+        
+
+        const form = document.createElement("form");
+        form.className = "need-validation";
+        form.addEventListener('submit', (e) => {e.preventDefault();});
+        form.onkeydown = "return event.key != 'Enter';";
+
+        const bid = document.createElement("div");
+        bid.className = "form-group my-2";
+        const bidAmount = document.createElement("input");
+        bidAmount.type = "number";
+        bidAmount.className = "form-control w-50";
+        bidAmount.id= "bidAmount";
+        bidAmount.required = true;
+        bid.append(bidAmount);
+
+        const submitBid =  document.createElement("button");
+        submitBid.type = "submit";
+        submitBid.id = "submitBid";
+        submitBid.className = "btn btn-light my-2 mb-5";
+        submitBid.innerHTML = "Submit Bid";
+        submitBid.addEventListener("click", (e) => {submitBids(id);});
+        bid.append(submitBid);
+
+        form.append(bid);
+
+        cardBody.append(bidLabel);
+        cardBody.append(form);
+    }
+}
+
+/**
+ * function to populate the page with bidding data retrieved from the RESTAPI call coresponding to the post id 
+ * @param {Array} bidlists an array of bids to display
+ */
+function addBids(bidslist){
+    
     const bids = document.createElement("p");
     bids.className = "";
-    bids.innerHTML = "Bids:";
+    bids.innerHTML = "Bids Overview:";
     bidslist.forEach(element => {
         const bid = document.createElement("p");
         bid.className = "";
@@ -283,7 +356,6 @@ function addBids(cardBody, bidslist){
 
     return bids;
 }
-
 
 /**
  * function to populate a caruosel with images from media table of a listing post 
@@ -316,7 +388,6 @@ function addImageCarousel(cardBody, media){
     carousel.innerHTML += "<button class='carousel-control-next' data-bs-target='#carouselControls' data-bs-slide='next' type='button'> <span class='carousel-control-next-icon' aria-hidden='true' ></span><span class='visually-hidden'>Next</span></button>"
     return carousel;
 }
-
 
 const queryString = document.location.search;
 const params = new URLSearchParams(queryString);

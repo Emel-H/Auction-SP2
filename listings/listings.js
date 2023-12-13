@@ -50,22 +50,23 @@ function getListingsArray(jsonReturn){
         cardHeader.append(postDate);
         card.append(cardHeader);
         const cardBody = document.createElement("div");
-        cardBody.className = "card-body";
+        cardBody.className = "card-body row";
         if(element.media.length>0){
             const postBodyImage = document.createElement("img");
-            postBodyImage.className = "card-text img-thumbnail";
+            postBodyImage.className = "card-text img-fluid col-3 my-1 rounded";
             postBodyImage.src = element.media[0];
             cardBody.append(postBodyImage);
         }
-        const postBody = document.createElement("p");
-        postBody.className = "card-text";
-        postBody.innerHTML = "Description:<br>"+element.description;
-        cardBody.append(postBody);
+        const postBody = document.createElement("div");
+        postBody.className = "card-text col-6 mx-2";
+        const postDescription = document.createElement("p");
+        postDescription.innerHTML = "Description:<br>"+element.description;
+        postBody.append(postDescription)
         if(token==null||token==""){
             const postBodyBids = document.createElement("p");
-            postBodyBids.className = "card-text text-warning";
+            postBodyBids.className = "card-text text-info";
             postBodyBids.innerHTML = "Bids can only be placed or viewed by registered users, please login or register to get the full experience";
-            cardBody.append(postBodyBids);
+            postBody.append(postBodyBids);
         }
         else{
             if(element._count.bids>0)
@@ -73,9 +74,10 @@ function getListingsArray(jsonReturn){
                 const postBodyBids = document.createElement("p");
                 postBodyBids.className = "card-text text-info";
                 postBodyBids.innerHTML = "Bids: "+element._count.bids + "<br> Latest Bid: " + element.bids[element._count.bids-1].amount + " creadit(s) by: " +element.bids[element._count.bids-1].bidderName ;
-                cardBody.append(postBodyBids);
+                postBody.append(postBodyBids);
             }
         }
+        cardBody.append(postBody);
         const readMore = document.createElement("a");
         readMore.href = "../post/?id="+element.id+"&edit=false";
         readMore.className = "btn btn-light";

@@ -56,8 +56,7 @@ async function updateAvatar(username){
             document.location.href = '../profile/index.html';
         }
         else{
-            alert("Not a valid URL image for your avatar, please try again ");
-            console.log(response);
+            alert(jsonReturn.errors[0].message);
         }
     }
     catch (error) {
@@ -77,8 +76,12 @@ async function deleteListing(id){
             document.location.href = '../';
         }else{
             const response = await listingDelete(id, token);
+            const jsonReturn = await response.json();
             if(response.ok){
                 document.location.href = '../profile/index.html';
+            }
+            else{
+                alert(jsonReturn.errors[0].message);
             }
         }
     }
