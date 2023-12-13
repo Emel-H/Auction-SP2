@@ -11,16 +11,17 @@ async function getPost(id){
         }
         else{
             const response = await listingGet(id);
-            const jsonReturn = await response.json();
-            
             if(response.ok){
-                
+                const jsonReturn = await response.json();
                 if(edit==="true"){
                     setPostEdit(jsonReturn);
                 } else {
                     setPostView(jsonReturn);
                 }
-                
+            }
+            else{
+                const jsonReturn = await response.json();
+                alert(jsonReturn.errors[0].message);
             }
         }
     }
@@ -41,11 +42,11 @@ async function editPost(id){
             document.location.href = '../';
         }else{
             const response = await listingEdit(id, token);
-            const jsonReturn = await response.json();
             if(response.ok){
                 document.location.href = '../profile';
             }
             else{
+                const jsonReturn = await response.json();
                 alert(jsonReturn.errors[0].message);
             }
         }
@@ -66,11 +67,11 @@ async function newPost(){
             document.location.href = '../';
         }else{
             const response = await listingNew(token);
-            const jsonReturn = await response.json();
             if(response.ok){
                 document.location.href = '../profile';
             }
             else{
+                const jsonReturn = await response.json();
                 alert(jsonReturn.errors[0].message);
             }
         }
@@ -88,11 +89,11 @@ async function submitBids(id){
             document.location.href = '../';
         }else{
             const response = await bidSubmit(id, token);
-            const jsonReturn = await response.json();
             if(response.ok){
                 document.location.href = '../profile';
             }
             else{
+                const jsonReturn = await response.json();
                 alert(jsonReturn.errors[0].message);
             }
         }

@@ -11,9 +11,8 @@ async function getProfile(username){
             document.location.href = '../';
         }else{
             const response = await profileInfo(username,token);
-            const jsonReturn = await response.json();
-            
             if(response.ok){
+                const jsonReturn = await response.json();
                 getProfileName(jsonReturn);
                 getProfileAvatar(jsonReturn);
                 getProfileEmail(jsonReturn);
@@ -21,6 +20,10 @@ async function getProfile(username){
                 getProfileWins(jsonReturn);
                 enableCreateListingAndUpdateAvatar(username);
                 getProfileListings(jsonReturn);
+            }
+            else{
+                const jsonReturn = await response.json();
+                alert(jsonReturn.errors[0].message);
             }
         }
     }
