@@ -107,6 +107,26 @@ async function listingEdit(id, token){
 }
 
 /**
+ * Modular function to update a given post using Noroff API
+ * @param {string} id the identifier of the post 
+ * @param {string} token the JWT token of the user currently logged in 
+ * @returns {string} API response of the PUT post attempt to update a post
+ */
+async function bidSubmit(id, token){
+    const response = await fetch(noroffListingsUrl+id+"/bids", {
+        method: 'POST',
+        body: JSON.stringify({
+            amount: Number(document.getElementById("bidAmount").value),
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            Authorization: `Bearer ${token}`,
+          },
+    });
+    return response;
+}
+
+/**
  * Modular function to add a new post using Noroff API
  * @param {string} token the JWT token of the user currently logged in 
  * @returns {string} API response of the POST a new post attempt
@@ -148,4 +168,4 @@ async function avatarUpdate(url, username, token){
     return response;
 }
 
-export{loginUser, registerUser, profileInfo, listingDelete, listingGet, listingEdit, listingNew, avatarUpdate};
+export{loginUser, registerUser, profileInfo, listingDelete, listingGet, listingEdit, listingNew, bidSubmit, avatarUpdate};
