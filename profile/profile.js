@@ -51,11 +51,11 @@ async function updateAvatar(username){
         const url = document.getElementById("avatarUrlInput").value;
         const token = localStorage.getItem('accessToken');
         const response = await avatarUpdate(url, username, token);
-        const jsonReturn = await response.json();
         if(response.ok){
             document.location.href = '../profile/index.html';
         }
         else{
+            const jsonReturn = await response.json();
             alert(jsonReturn.errors[0].message);
         }
     }
@@ -76,11 +76,11 @@ async function deleteListing(id){
             document.location.href = '../';
         }else{
             const response = await listingDelete(id, token);
-            const jsonReturn = await response.json();
             if(response.ok){
-                document.location.href = '../profile/index.html';
+                document.location.href = '../profile';
             }
             else{
+                const jsonReturn = await response.json();
                 alert(jsonReturn.errors[0].message);
             }
         }
@@ -158,7 +158,7 @@ function getProfileListings(jsonReturn){
         listingTitle.innerHTML = element.title;
         cardHeader.append(listingTitle);
         const listingUpdateDate = document.createElement("p");
-        listingUpdateDate.innerHTML = "last updated: " + new Date(element.updated);
+        listingUpdateDate.innerHTML = "last updated: " + new Date(element.updated).toLocaleDateString("en-UK");
         cardHeader.append(listingUpdateDate);
         card.append(cardHeader);
         const cardBody = document.createElement("div");
