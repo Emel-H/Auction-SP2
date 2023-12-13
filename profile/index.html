@@ -44,7 +44,7 @@
                 <div class="row my-5 mx-2">
                     <div class="col-1"></div>
                     <div class="col-sm-10">
-                        <div class="row">
+                        <div class="row pb-5">
                             <div class="col ">
                                 <img id="profileImage" class="w-100 img-thumbnail" src="" alt="profile image">
                             </div>
@@ -67,9 +67,22 @@
                                 
                             </div>
                         </div>
-                        <div id="profileListings" class="mt-5 row">
-                            <h2 class="text-center my-3 text-white bg-light">Personal Auction Listing(s)</h2> 
-                            <a href="../post/?new=true" id="addListingButton" class="btn btn-primary col-4 d-none">Create New Auction +</a>
+                        <a class="btn btn-light text-white w-100 mb-3" data-bs-toggle="collapse" href="#multiCollapse1" role="button" aria-expanded="false" aria-controls="multiCollapse1">
+                            <h2>My Auction Listing(s)</h2>
+                            <small>(click to show)</small> 
+                        </a>
+                        <div class="collapse multi-collapse" id="multiCollapse1">
+                            <div id="profileListings" class="my-3 row ">
+                                <a href="../post/?new=true" id="addListingButton" class="btn btn-primary col-4 d-none">Create New Auction +</a>
+                            </div>
+                        </div>
+                        <a class="btn btn-light text-white w-100" data-bs-toggle="collapse" href="#multiCollapse2" role="button" aria-expanded="false" aria-controls="multiCollapse2">
+                            <h2>My Bid(s)</h2>
+                            <small>(click to show)</small> 
+                        </a>
+                        <div class="collapse multi-collapse" id="multiCollapse2">
+                            <div id="profileBids" class="my-3 row ">
+                            </div>
                         </div>
                         
                     </div>
