@@ -96,8 +96,8 @@ async function listingDelete(id, token){
  * @param {string} token the JWT token of the user currently logged in 
  * @returns {string} API response of the GET post attempt
  */
-async function listingGet(id){
-    const response = await fetch(noroffListingsUrl+id+"?_seller=true&_bids=true&_active=true&sortOrder=asc&limit=100", {
+async function listingGet(id, active, sortOrder, offset){
+    const response = await fetch(noroffListingsUrl+id+"?_seller=true&_bids=true&_active="+active+"&sortOrder="+sortOrder+"&limit=100&offset="+offset, {
         method: 'GET',
     });
     return response;
