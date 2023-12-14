@@ -53,12 +53,12 @@ function getListingsArray(jsonReturn){
         cardBody.className = "card-body row";
         if(element.media.length>0){
             const postBodyImage = document.createElement("img");
-            postBodyImage.className = "col-5 my-1 ";
+            postBodyImage.className = "col-3 img-fluid my-1 object-fit-scale";
             postBodyImage.src = element.media[0];
             cardBody.append(postBodyImage);
         }
         const postBody = document.createElement("div");
-        postBody.className = "card-text col-6 mx-2";
+        postBody.className = "card-text col-7 mx-2";
         const postDescription = document.createElement("p");
         postDescription.innerHTML = "Description:<br>"+element.description;
         postBody.append(postDescription)
