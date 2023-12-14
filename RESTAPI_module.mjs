@@ -97,7 +97,7 @@ async function listingDelete(id, token){
  * @returns {string} API response of the GET post attempt
  */
 async function listingGet(id){
-    const response = await fetch(noroffListingsUrl+id+"?_seller=true&_bids=true&_active=true&sortOrder=asc&limit=100", {
+    const response = await fetch(noroffListingsUrl+id+"?_seller=true&_bids=true&_active=true&sortOrder=desc&limit=100", {
         method: 'GET',
     });
     return response;

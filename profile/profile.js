@@ -195,7 +195,7 @@ function setProfileListings(jsonReturn){
         cardBody.className = "card-body";
         if(element.media.length>0){
             const postBodyImage = document.createElement("img");
-            postBodyImage.className = "card-text img-thumbnail";
+            postBodyImage.className = "card-text img-flud col-5 object-fit-scale";
             postBodyImage.src = element.media[0];
             cardBody.append(postBodyImage);
         }
@@ -260,7 +260,7 @@ function setBids(jsonReturn){
         cardBody.append(listingDescription);
         const readMore = document.createElement("a");
         readMore.href = "../post/?id="+element.listing.id+"&edit=false";
-        readMore.className = "btn btn-light";
+        readMore.className = "btn btn-light mt-1";
         readMore.innerHTML = "View";
         cardBody.append(readMore);
         card.append(cardBody);
