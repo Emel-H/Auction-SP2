@@ -128,7 +128,11 @@ function setListings(listingsArray,search){
     });
 }
 
+window.alert = function() { };
+
 document.getElementById("submit").addEventListener("click", (e) => {
+    const posts = document.getElementById("listings");
+    posts.innerHTML = "<div class='d-flex justify-content-center'><div class='my-3 spinner-border text-primary' role='status'><span class='visually-hidden'>Loading...</span></div></div>";
     getListings();
   });
 
