@@ -11,7 +11,7 @@
     background-color: rgba(255, 255, 255, 0.4);
 }
 
-@media screen and (max-width: 575px){
+@media screen and (max-width: 675px){
     .imagefloattext img{
         display: none;
     }
