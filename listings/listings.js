@@ -5,17 +5,26 @@ let listingsArray;
 /**
  * function to populate the page with posts based on filters and searched results
  */
-async function getlistings(){
+async function getListings(){
     try {
-        
-        const response = await listingGet("");
-        const jsonReturn = await response.json();
-        
-        if(response.ok){
-            getListingsArray(jsonReturn);
-            const search = document.getElementById("searchinput").value;
-            setListings(listingsArray, search);
+        listingsArray = new Array();
+        let isMoreListings = true;
+        let offset = 0;
+        const order = document.getElementById("listingOrder").value;
+        const show = document.getElementById("listingShow").value;
+        while(isMoreListings){
+            const response = await listingGet("",show,order,offset);
+            const jsonReturn = await response.json();
+            if(response.ok){
+                getListingsArray(jsonReturn);
+            }
+            if(listingsArray.length != offset+100){
+                isMoreListings = false;
+            }
+            offset +=100;
         }
+        const search = document.getElementById("searchinput").value;
+        setListings(listingsArray, search);
         
     }
     catch (error) {
@@ -30,7 +39,6 @@ async function getlistings(){
  */
 function getListingsArray(jsonReturn){
     const token = localStorage.getItem('accessToken');
-    listingsArray = new Array();
     const listingPosts = jsonReturn;
     listingPosts.forEach(element => {
         const card = document.createElement("div");
@@ -42,7 +50,9 @@ function getListingsArray(jsonReturn){
         cardHeader.append(postTitle);
         const postOwner = document.createElement("a");
         if(token==null||token==""){}
-        else{postOwner.href = "../profile/index.html?user="+element.seller.name;}
+        else{
+            postOwner.href = "../profile/index.html?user="+element.seller.name;
+        }
         postOwner.innerHTML = "Created by "+element.seller.name;
         cardHeader.append(postOwner);
         const postDate = document.createElement("p");
@@ -119,7 +129,7 @@ function setListings(listingsArray,search){
 }
 
 document.getElementById("submit").addEventListener("click", (e) => {
-    getlistings();
+    getListings();
   });
 
-getlistings();
+getListings();
