@@ -4,7 +4,7 @@ import{listingGet, listingEdit, listingNew, bidSubmit} from "../RESTAPI_module.m
  * function to get a specific post, based on the request you will get a new post adding view, or an edit option or simply view option for the post
  * @param {number} id identified of the post 
  */
-async function getPost(id){
+async function setPost(id){
     try {
         if(newEntry==="true"){
             setPostNew();
@@ -351,7 +351,7 @@ function addBids(bidslist){
     bidslist.forEach(element => {
         const bid = document.createElement("p");
         bid.className = "";
-        bid.innerHTML = element.amount + " credit(s) by " + element.bidderName + " on " + new Date(element.created).toLocaleDateString("en-UK");
+        bid.innerHTML = element.amount + " credit(s) by <a href = '../profile/index.html?user=" + element.bidderName + "'>"+element.bidderName +"</a> on " + new Date(element.created).toLocaleDateString("en-UK");
         bids.append(bid);
     });
 
@@ -396,5 +396,5 @@ const id = params.get("id");
 const edit = params.get("edit");
 const newEntry = params.get("new");
 
-getPost(id);
+setPost(id);
 

@@ -247,15 +247,15 @@ function setBids(jsonReturn){
         cardHeader.append(listingUpdateDate);
         card.append(cardHeader);
         const cardBody = document.createElement("div");
-        cardBody.className = "card-body";
+        cardBody.className = "card-body row";
         if(element.listing.media.length>0){
             const postBodyImage = document.createElement("img");
-            postBodyImage.className = "card-text img-thumbnail";
+            postBodyImage.className = "card-text col-3 img-fluid object-fit-scale";
             postBodyImage.src = element.listing.media[0];
             cardBody.append(postBodyImage);
         }
         const listingDescription = document.createElement("p");
-        listingDescription.className = "card-text";
+        listingDescription.className = "card-text mx-1 col-6";
         listingDescription.innerHTML = "Description: <br>"+element.listing.description;
         cardBody.append(listingDescription);
         const readMore = document.createElement("a");
