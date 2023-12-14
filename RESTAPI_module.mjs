@@ -55,6 +55,25 @@ async function profileInfo(username, token){
 }
 
 /**
+ * Modular function to retrive the profile information (including posts, followers, and following) of a given user using Noroff API
+ * @param {string} username the username of the profile to be retrieved 
+ * @param {string} token the JWT token of the user currently logged in 
+ * @returns {string} API response of the GET profile attempt
+ */
+async function profileBids(username, token){
+    const response = await fetch(noroffProfileUrl+username+"/bids?_listings=true", {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            Authorization: `Bearer ${token}`,
+          },
+        
+    });
+    
+    return response;
+}
+
+/**
  * Modular function to delete a given post using Noroff API
  * @param {string} id the identifier of the post 
  * @param {string} token the JWT token of the user currently logged in 
@@ -202,4 +221,4 @@ async function avatarUpdate(url, username, token){
     return response;
 }
 
-export{loginUser, registerUser, profileInfo, listingDelete, listingGet, listingEdit, listingNew, bidSubmit, avatarUpdate};
+export{loginUser, registerUser, profileInfo, profileBids, listingDelete, listingGet, listingEdit, listingNew, bidSubmit, avatarUpdate};

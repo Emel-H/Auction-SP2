@@ -1,10 +1,10 @@
-import{profileInfo, listingDelete, avatarUpdate} from "../RESTAPI_module.mjs";
+import{profileInfo, profileBids, listingDelete, avatarUpdate} from "../RESTAPI_module.mjs";
 
 /**
  * function to attempt to get a user profile, if the response is ok from the API the user information is then populated in various sections on the profile page
  * @param {string} username the username of the profile to be retrieved 
  */
-async function getProfile(username){
+async function setProfile(username){
     try {
         const token = localStorage.getItem('accessToken');
         if(token==null){
@@ -13,13 +13,40 @@ async function getProfile(username){
             const response = await profileInfo(username,token);
             if(response.ok){
                 const jsonReturn = await response.json();
-                getProfileName(jsonReturn);
-                getProfileAvatar(jsonReturn);
-                getProfileEmail(jsonReturn);
-                getProfileCredits(jsonReturn);
-                getProfileWins(jsonReturn);
+                setProfileName(jsonReturn);
+                setProfileAvatar(jsonReturn);
+                setProfileEmail(jsonReturn);
+                setProfileCredits(jsonReturn);
+                setProfileWins(jsonReturn);
                 enableCreateListingAndUpdateAvatar(username);
-                getProfileListings(jsonReturn);
+                setProfileListings(jsonReturn);
+            }
+            else{
+                const jsonReturn = await response.json();
+                alert(jsonReturn.errors[0].message);
+            }
+        }
+    }
+    catch (error) {
+        // catches errors both in fetch and response.json
+        console.log(error);
+    }
+}
+
+/**
+ * function to attempt to get a user profile bids, if the response is ok from the API the user information is then populated in various sections on the profile page
+ * @param {string} username the username of the profile to be retrieved 
+ */
+async function setProfileBids(username){
+    try {
+        const token = localStorage.getItem('accessToken');
+        if(token==null){
+            document.location.href = '../';
+        }else{
+            const response = await profileBids(username,token);
+            if(response.ok){
+                const jsonReturn = await response.json();
+                setBids(jsonReturn);
             }
             else{
                 const jsonReturn = await response.json();
@@ -98,7 +125,7 @@ async function deleteListing(id){
  * function to populate the profile name
  * @param {JSON} jsonReturn the json returned from the API call attempt 
  */
-function getProfileName(jsonReturn){
+function setProfileName(jsonReturn){
     const profileName = document.getElementById("profileName");
     profileName.innerHTML = jsonReturn.name;
 }
@@ -107,7 +134,7 @@ function getProfileName(jsonReturn){
  * function to populate the profile image/avatar
  * @param {JSON} jsonReturn the json returned from the API call attempt 
  */
-function getProfileAvatar(jsonReturn){
+function setProfileAvatar(jsonReturn){
     const profileImage = document.getElementById("profileImage");
     if(jsonReturn.avatar !=""){
         profileImage.src = jsonReturn.avatar;
@@ -121,7 +148,7 @@ function getProfileAvatar(jsonReturn){
  * function to populate the profile email
  * @param {JSON} jsonReturn the json returned from the API call attempt 
  */
-function getProfileEmail(jsonReturn){
+function setProfileEmail(jsonReturn){
     const profileEmail = document.getElementById("profileEmail");
     profileEmail.innerHTML = jsonReturn.email;
 }
@@ -130,7 +157,7 @@ function getProfileEmail(jsonReturn){
  * function to populate the profile followers by itterating over the list 
  * @param {JSON} jsonReturn the json returned from the API call attempt 
  */
-function getProfileCredits(jsonReturn){
+function setProfileCredits(jsonReturn){
     const credits = document.getElementById("profileCredits");
     credits.innerHTML += jsonReturn.credits;
 }
@@ -139,7 +166,7 @@ function getProfileCredits(jsonReturn){
  * function to populate the profile followering by itterating over the list 
  * @param {JSON} jsonReturn the json returned from the API call attempt 
  */
-function getProfileWins(jsonReturn){
+function setProfileWins(jsonReturn){
     const wins = document.getElementById("profileWins");
     wins.innerHTML += jsonReturn.wins.length;
 }
@@ -148,7 +175,7 @@ function getProfileWins(jsonReturn){
  * function to populate the profile posts by itterating over the list. if this happens to by posts by the logged in user, edit and delete options are added in the form of buttons  
  * @param {JSON} jsonReturn the json returned from the API call attempt 
  */
-function getProfileListings(jsonReturn){
+function setProfileListings(jsonReturn){
     const listings = document.getElementById("profileListings");
     const addListingButton = document.getElementById("addListingButton");
     const profileListings = jsonReturn.listings;
@@ -201,6 +228,47 @@ function getProfileListings(jsonReturn){
 }
 
 /**
+ * function to populate the profile bids by itterating over the list. if this happens to by posts by the logged in user, edit and delete options are added in the form of buttons  
+ * @param {JSON} jsonReturn the json returned from the API call attempt 
+ */
+function setBids(jsonReturn){
+    const bids = document.getElementById("profileBids");
+    const profileBids = jsonReturn;
+    profileBids.forEach(element => {
+        const card = document.createElement("div");
+        card.className = "card my-2";
+        const cardHeader = document.createElement("div");
+        cardHeader.className = "card-header";
+        const listingTitle = document.createElement("h4");
+        listingTitle.innerHTML = element.listing.title + " - Your Bid: " + element.amount + " credit(s)";
+        cardHeader.append(listingTitle);
+        const listingUpdateDate = document.createElement("p");
+        listingUpdateDate.innerHTML = "date of bid: " + new Date(element.created).toLocaleDateString("en-UK");
+        cardHeader.append(listingUpdateDate);
+        card.append(cardHeader);
+        const cardBody = document.createElement("div");
+        cardBody.className = "card-body";
+        if(element.listing.media.length>0){
+            const postBodyImage = document.createElement("img");
+            postBodyImage.className = "card-text img-thumbnail";
+            postBodyImage.src = element.listing.media[0];
+            cardBody.append(postBodyImage);
+        }
+        const listingDescription = document.createElement("p");
+        listingDescription.className = "card-text";
+        listingDescription.innerHTML = "Description: <br>"+element.listing.description;
+        cardBody.append(listingDescription);
+        const readMore = document.createElement("a");
+        readMore.href = "../post/?id="+element.listing.id+"&edit=false";
+        readMore.className = "btn btn-light";
+        readMore.innerHTML = "View";
+        cardBody.append(readMore);
+        card.append(cardBody);
+        bids.append(card); 
+    });
+}
+
+/**
  * function to set which profile will be viewed based on if this is thecurrent users profile or a another user 
  */
 function setProfileUser(){
@@ -214,4 +282,5 @@ function setProfileUser(){
 
 let username = localStorage.getItem('username');
 setProfileUser();
-getProfile(username);
+setProfile(username);
+setProfileBids(username);
