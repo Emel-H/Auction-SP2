@@ -185,10 +185,10 @@ function setProfileListings(jsonReturn){
         const cardHeader = document.createElement("div");
         cardHeader.className = "card-header";
         const listingTitle = document.createElement("h4");
-        listingTitle.innerHTML = element.title;
+        listingTitle.textContent = element.title;
         cardHeader.append(listingTitle);
         const listingUpdateDate = document.createElement("p");
-        listingUpdateDate.innerHTML = "last updated: " + new Date(element.updated).toLocaleDateString("en-UK");
+        listingUpdateDate.textContent = "last updated: " + new Date(element.updated).toLocaleDateString("en-UK");
         cardHeader.append(listingUpdateDate);
         card.append(cardHeader);
         const cardBody = document.createElement("div");
@@ -201,7 +201,7 @@ function setProfileListings(jsonReturn){
         }
         const listingDescription = document.createElement("p");
         listingDescription.className = "card-text";
-        listingDescription.innerHTML = "Description: <br>"+element.description;
+        listingDescription.textContent = element.description;
         cardBody.append(listingDescription);
         const readMore = document.createElement("a");
         readMore.href = "../post/?id="+element.id+"&edit=false";
@@ -240,10 +240,10 @@ function setBids(jsonReturn){
         const cardHeader = document.createElement("div");
         cardHeader.className = "card-header";
         const listingTitle = document.createElement("h4");
-        listingTitle.innerHTML = element.listing.title + " - Your Bid: " + element.amount + " credit(s)";
+        listingTitle.textContent = element.listing.title + " - Your Bid: " + element.amount + " credit(s)";
         cardHeader.append(listingTitle);
         const listingUpdateDate = document.createElement("p");
-        listingUpdateDate.innerHTML = "date of bid: " + new Date(element.created).toLocaleDateString("en-UK");
+        listingUpdateDate.textContent = "date of bid: " + new Date(element.created).toLocaleDateString("en-UK");
         cardHeader.append(listingUpdateDate);
         card.append(cardHeader);
         const cardBody = document.createElement("div");
@@ -256,7 +256,7 @@ function setBids(jsonReturn){
         }
         const listingDescription = document.createElement("p");
         listingDescription.className = "card-text mx-1 col-6";
-        listingDescription.innerHTML = "Description: <br>"+element.listing.description;
+        listingDescription.textContent = element.listing.description;
         cardBody.append(listingDescription);
         const readMore = document.createElement("a");
         readMore.href = "../post/?id="+element.listing.id+"&edit=false";
