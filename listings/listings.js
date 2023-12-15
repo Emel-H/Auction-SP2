@@ -67,6 +67,7 @@ function getListingsArray(jsonReturn) {
     const postBody = document.createElement("div");
     postBody.className = "card-text col-7 mx-2";
     const postDescription = document.createElement("p");
+    postDescription.className = "text-truncate";
     postDescription.textContent = element.description;
     postBody.append(postDescription);
     if (token == null || token == "") {
@@ -84,8 +85,12 @@ function getListingsArray(jsonReturn) {
           element._count.bids +
           "<br> Latest Bid: " +
           element.bids[element._count.bids - 1].amount +
-          " creadit(s) by: " +
-          element.bids[element._count.bids - 1].bidderName;
+          " creadit(s) <br>by: " +
+          "<a href='../profile/index.html?user=" +
+          element.bids[element._count.bids - 1].bidderName +
+          "'>" +
+          element.bids[element._count.bids - 1].bidderName +
+          "</a>";
         postBody.append(postBodyBids);
       }
     }

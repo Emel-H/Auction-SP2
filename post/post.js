@@ -291,7 +291,9 @@ function setPostView(jsonReturn) {
   postBody.textContent = jsonReturn.description;
   cardBody.append(postBody);
 
-  placeBid(token, cardBody, id);
+  if (token != null) {
+    placeBid(token, cardBody, id);
+  }
 
   let postBids = addBids(jsonReturn.bids);
   if (token == null || token == "") {

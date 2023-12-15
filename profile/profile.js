@@ -199,7 +199,7 @@ function setProfileListings(jsonReturn) {
       cardBody.append(postBodyImage);
     }
     const listingDescription = document.createElement("p");
-    listingDescription.className = "card-text";
+    listingDescription.className = "card-text text-truncate";
     listingDescription.textContent = element.description;
     cardBody.append(listingDescription);
     const readMore = document.createElement("a");
@@ -258,7 +258,7 @@ function setBids(jsonReturn) {
       cardBody.append(postBodyImage);
     }
     const listingDescription = document.createElement("p");
-    listingDescription.className = "card-text mx-1 col-6";
+    listingDescription.className = "card-text mx-1 col-8 text-truncate";
     listingDescription.textContent = element.listing.description;
     cardBody.append(listingDescription);
     const readMore = document.createElement("a");
