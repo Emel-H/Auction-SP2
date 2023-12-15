@@ -100,7 +100,6 @@ async function submitBids(id){
     }
     catch (error) {
         // catches errors both in fetch and response.json
-        
         console.log(error);
     }
 }
@@ -262,16 +261,16 @@ function setPostView(jsonReturn){
     const cardHeader = document.createElement("div");
     cardHeader.className = "card-header";
     const postTitle = document.createElement("h4");
-    postTitle.innerHTML = jsonReturn.title;
+    postTitle.textContent = jsonReturn.title;
     cardHeader.append(postTitle);
     const postOwner = document.createElement("a");
     if(token==null||token==""){postOwner.href = "";}
     else{postOwner.href = "../profile/index.html?user="+jsonReturn.seller.name;}
-    postOwner.innerHTML = "Created by "+jsonReturn.seller.name;
+    postOwner.textContent = "Created by "+jsonReturn.seller.name;
     
     cardHeader.append(postOwner);
     const postDate = document.createElement("p");
-    postDate.innerHTML = "Expires: " + new Date(jsonReturn.endsAt).toLocaleDateString("en-UK");
+    postDate.textContent = "Expires: " + new Date(jsonReturn.endsAt).toLocaleDateString("en-UK");
     cardHeader.append(postDate);
     card.append(cardHeader);
     
@@ -281,7 +280,7 @@ function setPostView(jsonReturn){
     cardBody.append(postCarousel);
     const postBody = document.createElement("p");
     postBody.className = "card-text my-4";
-    postBody.innerHTML = "Description: <br>"+jsonReturn.description;
+    postBody.textContent = jsonReturn.description;
     cardBody.append(postBody);
     
     placeBid(token, cardBody, id);
