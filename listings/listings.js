@@ -46,17 +46,17 @@ function getListingsArray(jsonReturn){
         const cardHeader = document.createElement("div");
         cardHeader.className = "card-header";
         const postTitle = document.createElement("h4");
-        postTitle.innerHTML = element.title;
+        postTitle.textContent = element.title;
         cardHeader.append(postTitle);
         const postOwner = document.createElement("a");
         if(token==null||token==""){}
         else{
             postOwner.href = "../profile/index.html?user="+element.seller.name;
         }
-        postOwner.innerHTML = "Created by "+element.seller.name;
+        postOwner.textContent = "Created by "+element.seller.name;
         cardHeader.append(postOwner);
         const postDate = document.createElement("p");
-        postDate.innerHTML = new Date(element.endsAt).toLocaleDateString("en-UK");
+        postDate.textContent = new Date(element.endsAt).toLocaleDateString("en-UK");
         cardHeader.append(postDate);
         card.append(cardHeader);
         const cardBody = document.createElement("div");
@@ -70,12 +70,12 @@ function getListingsArray(jsonReturn){
         const postBody = document.createElement("div");
         postBody.className = "card-text col-7 mx-2";
         const postDescription = document.createElement("p");
-        postDescription.innerHTML = "Description:<br>"+element.description;
+        postDescription.textContent = element.description;
         postBody.append(postDescription)
         if(token==null||token==""){
             const postBodyBids = document.createElement("p");
             postBodyBids.className = "card-text text-info";
-            postBodyBids.innerHTML = "Bids can only be placed or viewed by registered users, please login or register to get the full experience";
+            postBodyBids.textContent = "Bids can only be placed or viewed by registered users, please login or register to get the full experience";
             postBody.append(postBodyBids);
         }
         else{
@@ -127,8 +127,6 @@ function setListings(listingsArray,search){
         posts.append(element); 
     });
 }
-
-window.alert = function() { };
 
 document.getElementById("submit").addEventListener("click", (e) => {
     const posts = document.getElementById("listings");
