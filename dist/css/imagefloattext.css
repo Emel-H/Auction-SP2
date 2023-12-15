@@ -1,22 +1,21 @@
-.imagefloattext img{
-    position: relative;
+.imagefloattext img {
+  position: relative;
 }
 
-.floattextbox{
-    position: relative;
-    width: 80%;
-    top: -15rem;
-    left: 10%;
-    border-radius: 1rem;
-    background-color: rgba(255, 255, 255, 0.4);
+.floattextbox {
+  position: relative;
+  width: 80%;
+  top: -15rem;
+  left: 10%;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
-@media screen and (max-width: 675px){
-    .imagefloattext img{
-        display: none;
-    }
-    .floattextbox{
-        top: 0rem;
-    }
-
+@media screen and (max-width: 675px) {
+  .imagefloattext img {
+    display: none;
+  }
+  .floattextbox {
+    top: 0rem;
+  }
 }
