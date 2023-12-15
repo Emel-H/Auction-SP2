@@ -1,105 +1,190 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" /></meta>
-        <meta name="description" content="MyAuction registeration page"></meta>
-        <meta name="keywords" content="auction, listings, registeration, MyA, MyAUCTION"></meta>
-        <title>Register | MyA</title>
-        <link rel="stylesheet" href="../dist/css/styles.css">
-    </head>
-    <body>
-        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white border-bottom">
-            <div class="container-fluid">
-              <a class="navbar-brand mx-2" href="../">My<span class="text-info">A</span>UCTION</a>
-              <button class="navbar-toggler mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse justify-content-end mx-5" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-2 mb-lg-0 ">
-                  <li class="nav-item">
-                    <a class="nav-link" id="profile-nav" href="../profile">Profile</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="../listings">Auctions</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="../guide">Guide</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="../about">About</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class=" btn btn-primary" id="login-nav" aria-current="page" href="../login">Log In</a>
-                    <button id="logout-nav" class=" btn btn-primary">Log Out</button>
-                  </li>
-                </ul> 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="MyAuction registeration page" />
+    <meta
+      name="keywords"
+      content="auction, listings, registeration, MyA, MyAUCTION"
+    />
+    <title>Register | MyA</title>
+    <link rel="stylesheet" href="../dist/css/styles.css" />
+  </head>
+  <body>
+    <nav
+      class="navbar sticky-top navbar-expand-lg navbar-light bg-white border-bottom"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand mx-2" href="../"
+          >My<span class="text-info">A</span>UCTION</a
+        >
+        <button
+          class="navbar-toggler mx-2"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end mx-5"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" id="profile-nav" href="../profile">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="../listings"
+                >Auctions</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="../guide">Guide</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="../about">About</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="btn btn-primary"
+                id="login-nav"
+                aria-current="page"
+                href="../login"
+                >Log In</a
+              >
+              <button id="logout-nav" class="btn btn-primary">Log Out</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <div class="container">
+        <div class="row my-5">
+          <div class="col"></div>
+          <div class="col-sm-6">
+            <h1 class="text-center my-1">Register your MyAuction user</h1>
+            <p class="text-center my-1" id="userFeedback">
+              Enter registration info below
+            </p>
+            <form
+              method="POST"
+              id="RegistrationForm"
+              class="need-validation mx-2"
+            >
+              <div class="form-group my-4">
+                <label for="FirstName">First Name</label>
+                <input
+                  type="text"
+                  class="form-control form-control"
+                  required
+                  id="FirstName"
+                  aria-describedby="first name"
+                />
               </div>
-            </div>
-        </nav>
-        <main>
-            <div class="container">
-                <div class="row my-5">
-                    <div class="col"></div>
-                    <div class="col-sm-6">
-                        <h1 class="text-center my-1">Register your MyAuction user</h1>
-                        <p class="text-center my-1" id="userFeedback">Enter registration info below</p>
-                        <form method="POST" id="RegistrationForm" class="need-validation mx-2">
-                            <div class="form-group my-4">
-                                <label for="FirstName">First Name</label>
-                                <input type="text" class="form-control form-control" required id="FirstName" aria-describedby="first name">
-                                
-                            </div>
-                            <div class="form-group my-4">
-                                <label for="LastName">Last Name</label>
-                                <input type="text" class="form-control form-control" required id="LastName" aria-describedby="last name">
-                                
-                            </div>
-                            <div class="form-group my-4">
-                                <label for="InputEmail">Email Address (User Name)</label>
-                                <input type="email" class="form-control form-control" required id="InputEmail" aria-describedby="email" pattern="^[A-Za-z0-9._%+-]+(@stud\.noroff)\.no$">
-                                <small id="email" class="form-text text-muted">You must use @stud.noroff.no email domains to register</small>
-                            </div>
-                            <div class="form-group my-4">
-                                <label for="InputPassword">Password</label>
-                                <input type="password" class="form-control form-control" minlength="8" required id="InputPassword">
-                                <small id="password" class="form-text text-muted">For Safety, password must be a minimum of 8 characters in length</small>
-                            </div>
-                            <div class="form-group my-4">
-                                <label for="avatar">Avatar</label>
-                                <input type="url" class="form-control form-control" id="avatar">
-                                <small id="password" class="form-text text-muted">To add an avatar image to your profile, please include the image URL (optional) </small>
-                            </div>
+              <div class="form-group my-4">
+                <label for="LastName">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control form-control"
+                  required
+                  id="LastName"
+                  aria-describedby="last name"
+                />
+              </div>
+              <div class="form-group my-4">
+                <label for="InputEmail">Email Address (User Name)</label>
+                <input
+                  type="email"
+                  class="form-control form-control"
+                  required
+                  id="InputEmail"
+                  aria-describedby="email"
+                  pattern="^[A-Za-z0-9._%+-]+(@stud\.noroff)\.no$"
+                />
+                <small id="email" class="form-text text-muted"
+                  >You must use @stud.noroff.no email domains to register</small
+                >
+              </div>
+              <div class="form-group my-4">
+                <label for="InputPassword">Password</label>
+                <input
+                  type="password"
+                  class="form-control form-control"
+                  minlength="8"
+                  required
+                  id="InputPassword"
+                />
+                <small id="password" class="form-text text-muted"
+                  >For Safety, password must be a minimum of 8 characters in
+                  length</small
+                >
+              </div>
+              <div class="form-group my-4">
+                <label for="avatar">Avatar</label>
+                <input
+                  type="url"
+                  class="form-control form-control"
+                  id="avatar"
+                />
+                <small id="password" class="form-text text-muted"
+                  >To add an avatar image to your profile, please include the
+                  image URL (optional)
+                </small>
+              </div>
 
-                            <button type="submit" id="SubmitButton" class="btn btn-primary w-100">Register</button>
-                        </form>
-                    </div>
-                    <div class="col"></div>
-                </div>
-            </div>
-        </main>
-        <footer>
-            <div class="container-fluid mt-5">
-                <div class="row">
-                    <div class="col-md bg-light">
-                        <p class="text-white mt-3 mx-5">MyAuction Company Ltd.</p>
-                        <p class="text-white mt-3 mx-5">Phone: +47 51 055 050</p>
-                        <p class="text-white mt-3 mx-5">Email: <a class="text-white" href="mailto:contact@myauction.net">contact@myauction.net</a></p>
-                    </div>
-                    <div class="col-md bg-light text-center">
-                        <a class="btn btn-white pt-5" href="www.facebook.com"><h1><i class="bi bi-facebook text-white"></i></h1></a>
-                        <a class="btn btn-white pt-5" href="www.instagram.com"><h1><i class="bi bi-instagram text-white"></i></h1></a>
-                        <a class="btn btn-white pt-5" href="www.twitter.com"><h1><i class="bi bi-twitter text-white"></i></h1></a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md bg-light">
-                        <p class="text-center text-white">&copy; 2023 MyAUCTION</p>
-                    </div>
-                </div>
-        </footer>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.js"> </script>
-        <script type="module" src="../nav.js"> </script>
-        <script type="module" src="register.js"> </script>
-    </body>
+              <button
+                type="submit"
+                id="SubmitButton"
+                class="btn btn-primary w-100"
+              >
+                Register
+              </button>
+            </form>
+          </div>
+          <div class="col"></div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="container-fluid mt-5">
+        <div class="row">
+          <div class="col-md bg-light">
+            <p class="text-white mt-3 mx-5">MyAuction Company Ltd.</p>
+            <p class="text-white mt-3 mx-5">Phone: +47 51 055 050</p>
+            <p class="text-white mt-3 mx-5">
+              Email:
+              <a class="text-white" href="mailto:contact@myauction.net"
+                >contact@myauction.net</a
+              >
+            </p>
+          </div>
+          <div class="col-md bg-light text-center">
+            <a class="btn btn-white pt-5" href="www.facebook.com"
+              ><h1><i class="bi bi-facebook text-white"></i></h1
+            ></a>
+            <a class="btn btn-white pt-5" href="www.instagram.com"
+              ><h1><i class="bi bi-instagram text-white"></i></h1
+            ></a>
+            <a class="btn btn-white pt-5" href="www.twitter.com"
+              ><h1><i class="bi bi-twitter text-white"></i></h1
+            ></a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md bg-light">
+            <p class="text-center text-white">&copy; 2023 MyAUCTION</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.js"></script>
+    <script type="module" src="../nav.js"></script>
+    <script type="module" src="register.js"></script>
+  </body>
 </html>
