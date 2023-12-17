@@ -274,7 +274,7 @@ function setPostView(jsonReturn) {
     postOwner.href = "../profile/index.html?user=" + jsonReturn.seller.name;
   }
   postOwner.textContent = "Created by " + jsonReturn.seller.name;
-
+  postOwner.className = "text-light";
   cardHeader.append(postOwner);
   const postDate = document.createElement("p");
   postDate.textContent =
@@ -365,7 +365,7 @@ function addBids(bidslist) {
     bid.className = "";
     bid.innerHTML =
       element.amount +
-      " credit(s) by <a href = '../profile/index.html?user=" +
+      " credit(s) by <a class='text-light' href = '../profile/index.html?user=" +
       element.bidderName +
       "'>" +
       element.bidderName +
