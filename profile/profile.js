@@ -189,6 +189,10 @@ function setProfileListings(jsonReturn) {
     listingUpdateDate.textContent =
       "last updated: " + new Date(element.updated).toLocaleDateString("en-UK");
     cardHeader.append(listingUpdateDate);
+    const listingExpireDate = document.createElement("p");
+    listingExpireDate.textContent =
+      "Expires: " + new Date(element.endsAt).toLocaleDateString("en-UK");
+    cardHeader.append(listingExpireDate);
     card.append(cardHeader);
     const cardBody = document.createElement("div");
     cardBody.className = "card-body";
@@ -211,7 +215,7 @@ function setProfileListings(jsonReturn) {
       addListingButton.className = "btn btn-primary col-4";
       const edit = document.createElement("a");
       edit.href = "../post/?id=" + element.id + "&edit=true";
-      edit.className = "btn btn-info mx-2";
+      edit.className = "btn btn-info text-white mx-2";
       edit.innerHTML = "Edit";
       cardBody.append(edit);
       const deleteButton = document.createElement("button");
@@ -248,6 +252,10 @@ function setBids(jsonReturn) {
     listingUpdateDate.textContent =
       "date of bid: " + new Date(element.created).toLocaleDateString("en-UK");
     cardHeader.append(listingUpdateDate);
+    const listingExpireDate = document.createElement("p");
+    listingExpireDate.textContent =
+      "Listing Expires: " + new Date(element.listing.endsAt).toLocaleDateString("en-UK");
+    cardHeader.append(listingExpireDate);
     card.append(cardHeader);
     const cardBody = document.createElement("div");
     cardBody.className = "card-body row";
