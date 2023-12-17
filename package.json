@@ -1,14 +1,14 @@
 {
-  "name": "css-frameworks-ca",
+  "name": "Auction-SP2",
   "version": "0.0.1",
-  "description": "A starting point for the CSS Frameworks CA project",
+  "description": "An Auction front-end website created as part of a semester assignment using Noroff APIs",
   "scripts": {
     "build": "sass src/scss:dist/css",
     "watch": "sass --watch src/scss:dist/css & live-server"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NoroffFEU/css-frameworks-ca.git"
+    "url": "git+https://github.com/Emel-H/Auction-SP2.git"
   },
   "keywords": [
     "CSS",
@@ -21,9 +21,9 @@
   "author": "Emel J.Hassen <emeHas54817@.stud.noroff.no>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NoroffFEU/css-frameworks-ca/issues"
+    "url": "https://github.com/Emel-H/Auction-SP2/issues"
   },
-  "homepage": "https://github.com/NoroffFEU/css-frameworks-ca#readme",
+  "homepage": "https://github.com/Emel-H/Auction-SP2#readme",
   "dependencies": {
     "bootstrap": "^5.3.1",
     "bootstrap-icons": "^1.11.2"
