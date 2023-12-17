@@ -63,6 +63,7 @@ function getListingsArray(jsonReturn) {
       const postBodyImage = document.createElement("img");
       postBodyImage.className = "col-3 img-fluid my-1 object-fit-scale";
       postBodyImage.src = element.media[0];
+      postBodyImage.alt = "listing main image";
       cardBody.append(postBodyImage);
     }
     const postBody = document.createElement("div");

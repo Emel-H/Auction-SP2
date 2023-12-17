@@ -200,6 +200,7 @@ function setProfileListings(jsonReturn) {
       const postBodyImage = document.createElement("img");
       postBodyImage.className = "card-text img-flud col-5 object-fit-scale";
       postBodyImage.src = element.media[0];
+      postBodyImage.alt = "listing main image";
       cardBody.append(postBodyImage);
     }
     const listingDescription = document.createElement("p");
@@ -264,6 +265,7 @@ function setBids(jsonReturn) {
       const postBodyImage = document.createElement("img");
       postBodyImage.className = "card-text col-3 img-fluid object-fit-scale";
       postBodyImage.src = element.listing.media[0];
+      postBodyImage.alt = "listing main image";
       cardBody.append(postBodyImage);
     }
     const listingDescription = document.createElement("p");
