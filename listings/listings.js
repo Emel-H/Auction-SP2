@@ -51,6 +51,7 @@ function getListingsArray(jsonReturn) {
       postOwner.href = "../profile/index.html?user=" + element.seller.name;
     }
     postOwner.textContent = "Created by " + element.seller.name;
+    postOwner.className = "text-light";
     cardHeader.append(postOwner);
     const postDate = document.createElement("p");
     postDate.textContent =
@@ -88,7 +89,7 @@ function getListingsArray(jsonReturn) {
           "<br> Latest Bid: " +
           element.bids[element._count.bids - 1].amount +
           " creadit(s) <br>by: " +
-          "<a href='../profile/index.html?user=" +
+          "<a class='text-light' href='../profile/index.html?user=" +
           element.bids[element._count.bids - 1].bidderName +
           "'>" +
           element.bids[element._count.bids - 1].bidderName +
