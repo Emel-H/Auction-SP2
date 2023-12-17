@@ -15,6 +15,9 @@ This Auction website using the Noroff API as part of my semester project
 1. Run npm install to install all dependencies
 2. Then you can use watch script option to use liveserver 
 
+To make sure your local is working correctly you can compare to this hosted version
+(https://emel-h.github.io/Auction-SP2/)
+
 ## Dependencies
 1. Bootstrap 5.3
 2. Bootrstap Icons 1.1
