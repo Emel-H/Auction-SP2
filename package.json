@@ -1,5 +1,5 @@
 {
-  "name": "Auction-SP2",
+  "name": "auction-sp2",
   "version": "0.0.1",
   "description": "An Auction front-end website created as part of a semester assignment using Noroff APIs",
   "scripts": {
