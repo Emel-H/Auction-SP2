@@ -297,7 +297,7 @@ function setPostView(jsonReturn) {
 
   let postBids = addBids(jsonReturn.bids);
   if (token == null || token == "") {
-    postBids.className = "text-warning";
+    postBids.className = "text-info";
     postBids.innerHTML =
       "Bids can only be placed or viewed by registered users, please login or register to get the full experience";
   }

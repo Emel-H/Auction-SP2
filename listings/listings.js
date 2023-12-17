@@ -53,7 +53,7 @@ function getListingsArray(jsonReturn) {
     postOwner.textContent = "Created by " + element.seller.name;
     cardHeader.append(postOwner);
     const postDate = document.createElement("p");
-    postDate.textContent = new Date(element.endsAt).toLocaleDateString("en-UK");
+    postDate.textContent = "Expires: "+new Date(element.endsAt).toLocaleDateString("en-UK");
     cardHeader.append(postDate);
     card.append(cardHeader);
     const cardBody = document.createElement("div");
