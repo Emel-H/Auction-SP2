@@ -399,6 +399,7 @@ function addImageCarousel(cardBody, media) {
     const carouselImage = document.createElement("img");
     carouselImage.className = "d-block w-100";
     carouselImage.src = media[i];
+    carouselImage.alt = "listing image " + i+1;
     carouselItem.append(carouselImage);
     carouselInner.append(carouselItem);
   }
