@@ -254,7 +254,8 @@ function setBids(jsonReturn) {
     cardHeader.append(listingUpdateDate);
     const listingExpireDate = document.createElement("p");
     listingExpireDate.textContent =
-      "Listing Expires: " + new Date(element.listing.endsAt).toLocaleDateString("en-UK");
+      "Listing Expires: " +
+      new Date(element.listing.endsAt).toLocaleDateString("en-UK");
     cardHeader.append(listingExpireDate);
     card.append(cardHeader);
     const cardBody = document.createElement("div");
